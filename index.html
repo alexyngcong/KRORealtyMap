@@ -1,0 +1,1998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MICS International — Dubai's Premier Financial Advisory</title>
+  <meta name="description" content="UAE's premier financial advisory firm. Audit, Tax, Risk, Corporate Finance, Business Setup and DIFC Specialist Services.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+  <style>
+    /* ---------------------------------------------
+       MICS International — Premium Interactive Design
+    --------------------------------------------- */
+    :root {
+      --ink: #0A1214;
+      --ink-light: #1A2A2C;
+      --teal: #1F6E5C;
+      --teal-light: #2D8A74;
+      --gold: #D4AF37;
+      --gold-light: #E5C76B;
+      --white: #FFFFFF;
+      --off-white: #F4F7F6;
+      --gray-100: #E9EEEC;
+      --gray-200: #D0DAD6;
+      --gray-300: #A8B8B2;
+      --text-dark: #0A1214;
+      --text-medium: #3C4A4C;
+      --text-light: #6F8082;
+      --shadow-sm: 0 4px 20px rgba(0,0,0,0.06);
+      --shadow-md: 0 12px 32px rgba(0,0,0,0.12);
+      --shadow-lg: 0 24px 48px rgba(0,0,0,0.18);
+      --border-light: rgba(10,18,20,0.08);
+      --border-medium: rgba(10,18,20,0.15);
+      --glass-bg: rgba(255,255,255,0.1);
+      --glass-border: rgba(255,255,255,0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--off-white);
+      color: var(--text-dark);
+      line-height: 1.5;
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
+      cursor: default;
+      position: relative;
+    }
+
+    /* Subtle noise overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background-image: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.015"/></svg>');
+      z-index: 9999;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, .serif {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* Buttons with enhanced interactions */
+    .btn-primary, .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+      border-radius: 0;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(4px);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--ink) 0%, var(--ink-light) 100%);
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: var(--shadow-md);
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    .btn-primary:hover::after {
+      width: 300px;
+      height: 300px;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+      border-color: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      color: var(--text-medium);
+      border: 1px solid var(--border-medium);
+    }
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--ink);
+      background: rgba(255,255,255,0.15);
+      transform: translateY(-2px);
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(10,18,20,0.95);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.nav-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 24px;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-back:hover {
+  color: var(--gold);
+}
+.nav-back svg {
+  transition: transform 0.2s;
+}
+.nav-back:hover svg {
+  transform: translateX(-3px);
+}
+.nav-container {
+max-width: 1280px;
+margin: 0 auto;
+padding: 0 32px;
+display: flex;
+align-items: center;
+height: 70px;
+}
+.nav-logo img {
+height: 32px;
+filter: brightness(0) invert(1);
+transition: filter 0.3s;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      margin-left: 40px;
+      gap: 20px;
+      flex: 1;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--gold);
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--gold);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+    .nav-cta {
+      display: flex;
+      gap: 12px;
+    }
+    .nav-cta a {
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s;
+      border-radius: 0;
+    }
+    .nav-cta .contact {
+      color: rgba(255,255,255,0.6);
+      border: 1px solid rgba(255,255,255,0.15);
+      background: transparent;
+    }
+    .nav-cta .contact:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .nav-cta .book {
+      background: var(--teal);
+      color: var(--white);
+      border: 1px solid transparent;
+    }
+    .nav-cta .book:hover {
+      background: var(--teal-light);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      padding-top: 70px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background-color: var(--off-white);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-left {
+      padding: 100px 48px 60px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      z-index: 2;
+    }
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      color: var(--teal);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .hero-eyebrow span {
+      width: 32px;
+      height: 2px;
+      background-color: var(--gold);
+    }
+    .hero-title {
+      font-size: clamp(40px, 5vw, 68px);
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--teal);
+      font-weight: 400;
+    }
+    .hero-divider {
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+      margin: 18px 0 22px;
+    }
+    .hero-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--text-medium);
+      max-width: 460px;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 0;
+    }
+    .hero-right {
+      position: relative;
+      background-color: var(--ink);
+      overflow: hidden;
+    }
+    .hero-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 120%;
+      background-image: url('https://images.unsplash.com/photo-1518684079-3c2ab9e9c8e4?w=1200&auto=format');
+      background-size: cover;
+      background-position: center 20%;
+      filter: brightness(0.85) saturate(1.2);
+      transition: transform 0.2s ease-out;
+      will-change: transform;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(10,18,20,0.3) 0%, rgba(31,110,92,0.2) 100%);
+    }
+    .hero-badge {
+      position: absolute;
+      top: 32px;
+      right: 32px;
+      background: linear-gradient(145deg, rgba(212,175,55,0.2), rgba(212,175,55,0.1));
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(212,175,55,0.3);
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      z-index: 3;
+      animation: badgeGlow 3s infinite alternate;
+    }
+    @keyframes badgeGlow {
+      0% { box-shadow: 0 0 5px rgba(212,175,55,0.2); }
+      100% { box-shadow: 0 0 15px rgba(212,175,55,0.6); }
+    }
+    .hero-badge svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--gold);
+      stroke-width: 2;
+    }
+    .hero-card {
+      position: absolute;
+      bottom: 32px;
+      left: 32px;
+      right: 32px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(16px);
+      border-top: 3px solid var(--gold);
+      padding: 22px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      z-index: 3;
+      box-shadow: var(--shadow-lg);
+    }
+    .hero-card-item {
+      text-align: left;
+    }
+    .hero-card-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 2px;
+    }
+    .hero-card-value {
+      font-family: 'Instrument Serif', serif;
+      font-size: 24px;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+    .hero-card-value span {
+      font-size: 14px;
+      color: var(--teal);
+      font-weight: 400;
+    }
+
+    /* Partners marquee */
+    .partners {
+      background: linear-gradient(90deg, var(--white) 0%, var(--off-white) 100%);
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+      padding: 20px 0;
+      overflow: hidden;
+    }
+    .partners-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .partners-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      white-space: nowrap;
+    }
+    .partners-logos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      animation: marquee 20s linear infinite;
+    }
+    .partner {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.6;
+      transition: opacity 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+    .partner:hover {
+      opacity: 1;
+      color: var(--teal);
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Stats strip */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      height: 340px;
+    }
+    .strip-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .strip-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.5) saturate(1.2);
+      transition: filter 0.5s, transform 8s;
+    }
+    .strip-item:hover .strip-bg {
+      filter: brightness(0.7) saturate(1.5);
+      transform: scale(1.05);
+    }
+    .strip-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px;
+      color: var(--white);
+      background: linear-gradient(0deg, rgba(10,18,20,0.6) 0%, transparent 60%);
+    }
+    .strip-number {
+      font-family: 'Instrument Serif', serif;
+      font-size: 52px;
+      font-weight: 600;
+      line-height: 1;
+    }
+    .strip-number span {
+      font-size: 26px;
+      color: var(--gold);
+    }
+    .strip-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      margin-top: 6px;
+    }
+    .strip-arrow {
+      position: absolute;
+      right: 22px;
+      bottom: 22px;
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(255,255,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s, border-color 0.3s;
+      background: rgba(0,0,0,0.2);
+      backdrop-filter: blur(4px);
+    }
+    .strip-item:hover .strip-arrow {
+      background-color: var(--gold);
+      border-color: var(--gold);
+    }
+    .strip-arrow svg {
+      width: 16px;
+      height: 16px;
+      stroke: rgba(255,255,255,0.8);
+      transition: stroke 0.3s;
+    }
+    .strip-item:hover .strip-arrow svg {
+      stroke: var(--white);
+    }
+
+    /* Sections */
+    .section {
+      padding: 80px 0;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .section-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--teal);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .section-eyebrow span {
+      width: 26px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+    }
+    .section-title {
+      font-size: clamp(28px, 3.5vw, 44px);
+      color: var(--ink);
+    }
+    .section-title em {
+      font-style: italic;
+      color: var(--teal);
+      font-weight: 400;
+    }
+    .section-note {
+      max-width: 300px;
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-medium);
+      line-height: 1.7;
+    }
+
+    /* Services split */
+    .service-split {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      border: 1px solid var(--border-medium);
+      margin-bottom: 2px;
+      background-color: var(--white);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .service-split:hover {
+      box-shadow: var(--shadow-lg);
+      transform: scale(1.01);
+    }
+    .service-left {
+      background: linear-gradient(135deg, var(--ink) 0%, var(--ink-light) 100%);
+      padding: 40px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .service-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 52px;
+      color: rgba(255,255,255,0.1);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .service-cat {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .service-name {
+      font-family: 'Instrument Serif', serif;
+      font-size: 22px;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .service-desc {
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+    .service-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.3);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 0.3s, gap 0.3s;
+      padding: 0;
+      text-decoration: none;
+    }
+    .service-cta:hover {
+      color: var(--gold);
+      gap: 8px;
+    }
+    .service-cta svg {
+      transition: transform 0.3s;
+    }
+    .service-cta:hover svg {
+      transform: translateX(4px);
+    }
+    .service-right {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background-color: var(--border-medium);
+    }
+    .service-item {
+      background-color: var(--white);
+      padding: 24px;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .service-item:hover {
+      background-color: var(--gray-100);
+      transform: translateY(-4px);
+    }
+    .service-icon {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border-medium);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .service-item:hover .service-icon {
+      border-color: var(--teal);
+      background-color: rgba(31,110,92,0.05);
+    }
+    .service-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--teal);
+    }
+    .service-item-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .service-points {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .service-point {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--text-medium);
+    }
+    .service-point::before {
+      content: '';
+      width: 10px;
+      height: 1px;
+      background-color: var(--gold);
+    }
+
+    /* Feature split */
+    .feature {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 500px;
+      border-top: 1px solid var(--border-medium);
+      border-bottom: 1px solid var(--border-medium);
+    }
+    .feature.flip {
+      direction: rtl;
+    }
+    .feature.flip > * {
+      direction: ltr;
+    }
+    .feature-image {
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-img-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.65) saturate(1.2);
+      transition: filter 0.5s, transform 8s;
+    }
+    .feature-image:hover .feature-img-bg {
+      filter: brightness(0.8) saturate(1.4);
+      transform: scale(1.05);
+    }
+    .feature-label {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      right: 24px;
+      color: var(--white);
+      z-index: 2;
+      background: linear-gradient(90deg, rgba(0,0,0,0.3) 0%, transparent 100%);
+      padding: 16px;
+      backdrop-filter: blur(4px);
+      border-left: 3px solid var(--gold);
+    }
+    .feature-label-cat {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .feature-label-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 20px;
+      margin-top: 4px;
+    }
+    .feature-content {
+      padding: 60px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: var(--white);
+    }
+    .feature-content.alt {
+      background: linear-gradient(135deg, var(--gray-100) 0%, var(--off-white) 100%);
+    }
+    .feature-desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-medium);
+      line-height: 1.8;
+      margin: 20px 0;
+      border-left: 2px solid var(--gold);
+      padding-left: 16px;
+    }
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .feature-list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-dark);
+    }
+    .feature-list-item::before {
+      content: '';
+      width: 14px;
+      height: 1px;
+      background-color: var(--teal);
+      margin-top: 8px;
+    }
+
+    /* Why MICS */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background-color: var(--border-medium);
+      border: 1px solid var(--border-medium);
+    }
+    .why-cell {
+      background-color: var(--white);
+      padding: 32px 28px;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .why-cell:hover {
+      background-color: var(--gray-100);
+      transform: translateY(-4px);
+    }
+    .why-number {
+      font-family: 'Instrument Serif', serif;
+      font-size: 40px;
+      color: rgba(10,18,20,0.05);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .why-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .why-desc {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-medium);
+      line-height: 1.6;
+    }
+
+    /* DIFC */
+    .difc {
+      background: linear-gradient(135deg, var(--ink) 0%, #0F2A24 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .difc::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1501776553610-5b5c2107f9d3?w=1400&auto=format');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.2) saturate(1.5);
+      opacity: 0.6;
+    }
+    .difc-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 80px 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      position: relative;
+      z-index: 2;
+    }
+    .difc-left .section-eyebrow {
+      color: var(--gold);
+    }
+    .difc-left .section-title {
+      color: var(--white);
+    }
+    .difc-left .section-title em {
+      color: var(--gold);
+    }
+    .difc-desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.8;
+      margin: 20px 0;
+      border-left: 2px solid var(--gold);
+      padding-left: 16px;
+    }
+    .difc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212,175,55,0.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(212,175,55,0.3);
+      padding: 8px 16px;
+      margin-bottom: 20px;
+    }
+    .difc-badge svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--gold);
+    }
+    .difc-badge span {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .difc-right {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .difc-item {
+      display: flex;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      transition: padding-left 0.3s;
+    }
+    .difc-item:hover {
+      padding-left: 8px;
+    }
+    .difc-item-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 28px;
+      color: var(--gold);
+      opacity: 0.5;
+      min-width: 44px;
+    }
+    .difc-item-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+    .difc-item-desc {
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* Testimonials */
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background-color: var(--border-medium);
+      border: 1px solid var(--border-medium);
+      margin-top: 40px;
+    }
+    .testimonial {
+      background-color: var(--white);
+      padding: 40px 32px;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .testimonial:hover {
+      background-color: var(--gray-100);
+      transform: translateY(-4px);
+    }
+    .testimonial-quote {
+      font-family: 'Instrument Serif', serif;
+      font-size: 52px;
+      color: var(--gold);
+      opacity: 0.2;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .testimonial-text {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-medium);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: var(--white);
+      font-size: 14px;
+    }
+    .testimonial-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .testimonial-role {
+      font-size: 11px;
+      color: var(--text-light);
+    }
+
+    /* CTA Band */
+    .cta-band {
+      background: linear-gradient(135deg, var(--teal) 0%, #145A4A 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1400&auto=format');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.15);
+      opacity: 0.3;
+    }
+    .cta-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 80px 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .cta-left h2 {
+      font-size: clamp(28px, 3.5vw, 44px);
+      color: var(--white);
+    }
+    .cta-left h2 em {
+      color: var(--gold);
+      font-style: italic;
+      font-weight: 400;
+    }
+    .cta-left p {
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+      margin: 20px 0 28px;
+      max-width: 400px;
+    }
+    .cta-form {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 32px;
+    }
+    .cta-form-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+    .cta-form-sub {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 20px;
+    }
+    .cta-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .cta-field {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .cta-field.full {
+      grid-column: span 2;
+    }
+    .cta-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+    .cta-input,
+    .cta-select {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 10px 14px;
+      color: var(--white);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .cta-input:focus,
+    .cta-select:focus {
+      border-color: var(--gold);
+    }
+    .cta-input::placeholder {
+      color: rgba(255,255,255,0.3);
+    }
+    .cta-select option {
+      background-color: var(--ink);
+    }
+    .cta-btn {
+      background: var(--ink);
+      color: var(--white);
+      border: none;
+      padding: 12px;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s;
+      width: 100%;
+      margin-top: 12px;
+    }
+    .cta-btn:hover {
+      background: var(--teal);
+    }
+    .cta-note {
+      font-size: 9px;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--ink);
+      padding: 48px 0 24px;
+    }
+    .footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+    .footer-main {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 20px;
+    }
+    .footer-logo img {
+      height: 32px;
+      filter: brightness(0) invert(1);
+      margin-bottom: 12px;
+    }
+    .footer-tagline {
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.7;
+      max-width: 240px;
+    }
+    .footer-col-title {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-size: 12px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-copyright {
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+    }
+    .footer-legal {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-legal a {
+      font-size: 10px;
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .footer-legal a:hover {
+      color: var(--gold);
+    }
+
+    /* Sticky CTA with enhanced pulse */
+    .sticky-cta {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 900;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.4s, transform 0.4s;
+      pointer-events: none;
+    }
+    .sticky-cta.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+    .sticky-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--ink) 0%, var(--ink-light) 100%);
+      color: var(--white);
+      padding: 14px 20px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: background 0.3s, transform 0.3s;
+      backdrop-filter: blur(4px);
+    }
+    .sticky-btn:hover {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+      transform: scale(1.05);
+    }
+    .sticky-pulse {
+      width: 8px;
+      height: 8px;
+      background-color: var(--gold);
+      border-radius: 50%;
+      position: relative;
+    }
+    .sticky-pulse::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      70% { transform: scale(2); opacity: 0; }
+      100% { transform: scale(1); opacity: 0; }
+    }
+
+    /* Reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+
+    /* Counter animation */
+    .counted {
+      animation: countPop 0.5s ease-out;
+    }
+    @keyframes countPop {
+      0% { transform: scale(0.9); opacity: 0.5; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .feature { grid-template-columns: 1fr; }
+      .difc-container { grid-template-columns: 1fr; }
+      .cta-container { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .testimonial-grid { grid-template-columns: 1fr 1fr; }
+      .stats-strip { grid-template-columns: 1fr 1fr; height: auto; }
+      .strip-item { height: 240px; }
+      .service-split { grid-template-columns: 1fr; }
+      .footer-main { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 700px) {
+      .why-grid { grid-template-columns: 1fr; }
+      .testimonial-grid { grid-template-columns: 1fr; }
+      .stats-strip { grid-template-columns: 1fr; }
+      .service-right { grid-template-columns: 1fr; }
+      .footer-main { grid-template-columns: 1fr; }
+      .container, .partners-container, .footer-container { padding: 0 24px; }
+      .hero-left { padding: 80px 24px 40px; }
+      .hero-title { font-size: 40px; }
+      .hero-sub { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav id="navbar">
+<div class="nav-container">
+<a href="Mics_group_fixed__1_.html" class="nav-back">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12,19 5,12 12,5"/></svg>
+  <span>MICS Group</span>
+</a>
+    <a href="index.html" class="nav-logo">
+      <img src="https://mics.ae/wp-content/uploads/2023/12/mics-logo.png" alt="MICS International">
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="team.html">Team</a>
+      <a href="difc.html">DIFC</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="contact.html" class="contact">Contact</a>
+      <a href="https://calendly.com/diya07/free-corporate-tax-advisory" class="book">Book Advisory</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section with Parallax -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span></span>
+      Dubai, UAE · Est. 2018
+    </div>
+    <h1 class="hero-title">Your Partner for<br>Financial <em>Excellence.</em></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">Comprehensive advisory spanning audit, tax, risk, corporate finance, and business setup — serving organisations across UAE and GCC with discipline‑specific expertise.</p>
+    <div class="hero-buttons">
+      <a href="services.html" class="btn-primary">Explore Services →</a>
+      <a href="contact.html" class="btn-secondary">Get in Touch</a>
+      <a href="https://calendly.com/diya07/free-corporate-tax-advisory" class="btn-secondary" style="border-color: var(--gold); color: var(--gold);">Free Consultation</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <!-- Bright Dubai skyline image -->
+    <div class="hero-image" id="parallaxImage"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <span>DIFC CSP</span>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-item">
+        <div class="hero-card-label">Funding Arranged</div>
+        <div class="hero-card-value" id="stat1">$800<span>M+</span></div>
+      </div>
+      <div class="hero-card-item">
+        <div class="hero-card-label">Clients Served</div>
+        <div class="hero-card-value" id="stat2">2,000<span>+</span></div>
+      </div>
+      <div class="hero-card-item">
+        <div class="hero-card-label">Service Lines</div>
+        <div class="hero-card-value">7<span> disciplines</span></div>
+      </div>
+      <div class="hero-card-item">
+        <div class="hero-card-label">Banking Partners</div>
+        <div class="hero-card-value" id="stat4">55<span>+</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Partners Marquee -->
+<div class="partners">
+  <div class="partners-container">
+    <div class="partners-label">Trusted by businesses across</div>
+    <div class="partners-logos">
+      <span class="partner">Real Estate</span>
+      <span class="partner">Technology</span>
+      <span class="partner">Healthcare</span>
+      <span class="partner">Manufacturing</span>
+      <span class="partner">Financial Services</span>
+      <span class="partner">Hospitality</span>
+      <span class="partner">Trading & FMCG</span>
+      <span class="partner">Energy</span>
+      <span class="partner">Education</span>
+      <!-- Duplicate for seamless marquee -->
+      <span class="partner">Real Estate</span>
+      <span class="partner">Technology</span>
+      <span class="partner">Healthcare</span>
+    </div>
+  </div>
+</div>
+
+<!-- Stats Image Strip -->
+<div class="stats-strip">
+  <div class="strip-item">
+    <div class="strip-bg" style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&auto=format')"></div>
+    <div class="strip-content">
+      <div class="strip-number">$800<span>M+</span></div>
+      <div class="strip-label">Funding Arranged</div>
+    </div>
+    <div class="strip-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></div>
+  </div>
+  <div class="strip-item">
+    <div class="strip-bg" style="background-image:url('https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&auto=format')"></div>
+    <div class="strip-content">
+      <div class="strip-number">2,000<span>+</span></div>
+      <div class="strip-label">Clients Empowered</div>
+    </div>
+    <div class="strip-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></div>
+  </div>
+  <div class="strip-item">
+    <div class="strip-bg" style="background-image:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&auto=format')"></div>
+    <div class="strip-content">
+      <div class="strip-number">30<span>yr+</span></div>
+      <div class="strip-label">Industry Experience</div>
+    </div>
+    <div class="strip-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></div>
+  </div>
+  <div class="strip-item">
+    <div class="strip-bg" style="background-image:url('https://images.unsplash.com/photo-1497215842964-222b430dc094?w=600&auto=format')"></div>
+    <div class="strip-content">
+      <div class="strip-number">55<span>+</span></div>
+      <div class="strip-label">Banking Partners</div>
+    </div>
+    <div class="strip-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></div>
+  </div>
+</div>
+
+<!-- Services Section -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow"><span></span>What We Do</div>
+        <h2 class="section-title">Expert Advisory for <em>Maximum Results</em></h2>
+      </div>
+      <p class="section-note">An integrated suite covering the full financial spectrum — from licensing to complex M&A.</p>
+    </div>
+
+    <!-- Audit & Risk -->
+    <div class="service-split reveal">
+      <div class="service-left">
+        <div>
+          <div class="service-num">01</div>
+          <div class="service-cat">Assurance</div>
+          <div class="service-name">Audit & Assurance</div>
+          <p class="service-desc">Rigorous statutory, external, and internal audit services delivering stakeholder confidence at every level — IFRS compliant and independently verified.</p>
+        </div>
+        <a href="services/audit.html" class="service-cta">View Full Service <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></a>
+      </div>
+      <div class="service-right">
+        <div class="service-item">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><polyline points="9,11 12,14 22,4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+          <div class="service-item-title">Statutory & External Audit</div>
+          <div class="service-points">
+            <div class="service-point">Statutory Audit · All entity types</div>
+            <div class="service-point">External Audit · IFRS compliant</div>
+            <div class="service-point">National ICV Certification</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div class="service-item-title">Risk Advisory</div>
+          <div class="service-points">
+            <div class="service-point">Internal Audit & ICoFR</div>
+            <div class="service-point">Fraud & Forensic Investigation</div>
+            <div class="service-point">AML Compliance Framework</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 13h4"/></svg></div>
+          <div class="service-item-title">Specialist Audits</div>
+          <div class="service-points">
+            <div class="service-point">Energy Audit</div>
+            <div class="service-point">Stock Audit</div>
+            <div class="service-point">Asset & Transaction Tracing</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div>
+          <div class="service-item-title">Reporting & Compliance</div>
+          <div class="service-points">
+            <div class="service-point">Management Reporting & MIS</div>
+            <div class="service-point">Accounting Close Assistance</div>
+            <div class="service-point">Enterprise Risk Management</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tax & Compliance -->
+    <div class="service-split reveal delay-1">
+      <div class="service-left">
+        <div>
+          <div class="service-num">02</div>
+          <div class="service-cat">Compliance</div>
+          <div class="service-name">Tax & Compliance</div>
+          <p class="service-desc">Full-spectrum UAE tax advisory — Corporate Tax, VAT, Transfer Pricing, Pillar 2/DMTT, and international tax planning by certified specialists.</p>
+        </div>
+        <a href="services/tax.html" class="service-cta">View Full Service <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></a>
+      </div>
+      <div class="service-right">
+        <div class="service-item">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div>
+          <div class="service-item-title">Corporate & Direct Tax</div>
+          <div class="service-points">
+            <div class="service-point">Corporate Tax Registration & Filing</div>
+            <div class="service-point">Pillar 2 / DMTT Advisory</div>
+            <div class="service-point">FTA Audit Assistance</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+          <div class="service-item-title">VAT & Indirect Tax</div>
+          <div class="service-points">
+            <div class="service-point">VAT Compliance & Returns</div>
+            <div class="service-point">VAT Refund Applications</div>
+            <div class="service-point">E-Invoicing Services</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <div class="service-item-title">Transfer Pricing</div>
+          <div class="service-points">
+            <div class="service-point">TP Benchmarking & Assessment</div>
+            <div class="service-point">Local File, Master File, CbCR</div>
+            <div class="service-point">Tax Residency Certificate</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg></div>
+          <div class="service-item-title">Excise & Customs</div>
+          <div class="service-points">
+            <div class="service-point">Excise Tax Registration</div>
+            <div class="service-point">Designated Zone Registrations</div>
+            <div class="service-point">Customs Health Check</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Corporate Finance & Business Setup -->
+    <div class="service-split reveal delay-2">
+      <div class="service-left">
+        <div>
+          <div class="service-num">03</div>
+          <div class="service-cat">Advisory</div>
+          <div class="service-name">Corporate Finance & Business Setup</div>
+          <p class="service-desc">Strategic capital advisory, M&A transactions, business valuations, and end-to-end UAE company formation with 55+ banking relationships.</p>
+        </div>
+        <a href="services/corporate-finance.html" class="service-cta">View Full Service <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></a>
+      </div>
+      <div class="service-right">
+        <div class="service-item">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><polyline points="22,7 13.5,15.5 8.5,10.5 2,17"/><polyline points="16,7 22,7 22,13"/></svg></div>
+          <div class="service-item-title">M&A & Transactions</div>
+          <div class="service-points">
+            <div class="service-point">Mergers & Acquisitions Advisory</div>
+            <div class="service-point">Business Valuation</div>
+            <div class="service-point">Due Diligence</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <div class="service-item-title">Capital & Financing</div>
+          <div class="service-points">
+            <div class="service-point">PE Financing & Capital Raising</div>
+            <div class="service-point">Debt Structuring</div>
+            <div class="service-point">Financial Modelling</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div>
+          <div class="service-item-title">Business Formation</div>
+          <div class="service-points">
+            <div class="service-point">Mainland & Free Zone Setup</div>
+            <div class="service-point">Licensing & PRO Services</div>
+            <div class="service-point">Banking Introductions (55+)</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <div class="service-item-title">Operational Compliance</div>
+          <div class="service-points">
+            <div class="service-point">Monthly MIS & Management Accounts</div>
+            <div class="service-point">ESR Compliance</div>
+            <div class="service-point">Bookkeeping & Accounting</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+      <a href="services.html" class="btn-primary">Explore All 40+ Services →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Feature: Tax -->
+<div class="feature">
+  <div class="feature-image">
+    <div class="feature-img-bg" style="background-image:url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=900&auto=format')"></div>
+    <div class="feature-label">
+      <div class="feature-label-cat">Tax Advisory</div>
+      <div class="feature-label-title">UAE Corporate Tax · VAT · Transfer Pricing</div>
+    </div>
+  </div>
+  <div class="feature-content">
+    <div class="section-eyebrow"><span></span>Expert Tax Advisory</div>
+    <h2 class="section-title">Proactive Tax Strategy —<br><em>Stay Compliant,</em> Stay Competitive</h2>
+    <p class="feature-desc">Our certified tax team delivers comprehensive UAE and GCC tax advisory — from Corporate Tax registration through to complex international structuring and transfer pricing documentation.</p>
+    <div class="feature-list">
+      <div class="feature-list-item">UAE Corporate Tax Registration & Compliance</div>
+      <div class="feature-list-item">VAT Registration, Returns & Refund Advisory</div>
+      <div class="feature-list-item">Transfer Pricing — Local File, Master File, CbCR</div>
+      <div class="feature-list-item">Pillar 2 / DMTT Impact Assessment</div>
+      <div class="feature-list-item">Tax Residency Certificate</div>
+    </div>
+    <div style="display: flex; gap: 16px;">
+      <a href="https://calendly.com/diya07/free-corporate-tax-advisory" class="btn-primary">Book Free Tax Session →</a>
+      <a href="services/tax.html" class="btn-secondary">All Tax Services</a>
+    </div>
+  </div>
+</div>
+
+<!-- Feature: Corporate Finance (flipped) -->
+<div class="feature flip">
+  <div class="feature-image">
+    <div class="feature-img-bg" style="background-image:url('https://images.unsplash.com/photo-1572021335469-31706a17aaef?w=900&auto=format')"></div>
+    <div class="feature-label">
+      <div class="feature-label-cat">Corporate Finance</div>
+      <div class="feature-label-title">M&A · Capital Raising · Business Valuation</div>
+    </div>
+  </div>
+  <div class="feature-content alt">
+    <div class="section-eyebrow"><span></span>$800M+ Arranged</div>
+    <h2 class="section-title">Deals Structured for <em>Impact</em>,<br>Not Just Completion</h2>
+    <p class="feature-desc">Our CFA and CA-qualified corporate finance team brings unmatched UAE and GCC transaction experience — from early-stage capital raises through to complex institutional M&A.</p>
+    <div class="feature-list">
+      <div class="feature-list-item">Mergers & Acquisitions Advisory</div>
+      <div class="feature-list-item">Business Valuation & Fairness Opinions</div>
+      <div class="feature-list-item">PE Financing & Capital Raising ($800M+ arranged)</div>
+      <div class="feature-list-item">Financial Modelling & Feasibility Studies</div>
+      <div class="feature-list-item">Due Diligence — Financial, Tax & Commercial</div>
+    </div>
+    <div style="display: flex; gap: 16px;">
+      <a href="contact.html" class="btn-primary">Discuss Your Transaction →</a>
+      <a href="services/corporate-finance.html" class="btn-secondary">Corporate Finance</a>
+    </div>
+  </div>
+</div>
+
+<!-- Why MICS -->
+<section class="section" style="background: linear-gradient(135deg, var(--gray-100) 0%, var(--off-white) 100%);">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow"><span></span>Why MICS International</div>
+        <h2 class="section-title">Built for Businesses<br>that Demand <em>Excellence</em></h2>
+      </div>
+      <p class="section-note">Over 2,000 clients. 30+ years combined expertise. Certified across all major UAE regulatory frameworks.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-cell">
+        <div class="why-number">01</div>
+        <div class="why-title">UAE Regulatory Specialists</div>
+        <div class="why-desc">Deep knowledge of FTA, DFSA, DIFC Authority, and all UAE free zone regulations built over three decades of practice.</div>
+      </div>
+      <div class="why-cell">
+        <div class="why-number">02</div>
+        <div class="why-title">CFA, CA & ACCA Qualified</div>
+        <div class="why-desc">Credentialed professionals across every discipline — certified expertise you can place absolute confidence in.</div>
+      </div>
+      <div class="why-cell">
+        <div class="why-number">03</div>
+        <div class="why-title">Proactive, Not Reactive</div>
+        <div class="why-desc">We identify opportunities and risks before they arise — strategic partnership, not just compliance execution.</div>
+      </div>
+      <div class="why-cell">
+        <div class="why-number">04</div>
+        <div class="why-title">One Firm, Full Spectrum</div>
+        <div class="why-desc">Audit, tax, risk, finance, and business setup under one roof — coordinated advisory without fragmented teams.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFC Highlight -->
+<div class="difc">
+  <div class="difc-container">
+    <div class="difc-left">
+      <div class="difc-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <span>DIFC Certified Service Provider</span>
+      </div>
+      <div class="section-eyebrow"><span></span>DIFC Specialist Division</div>
+      <h2 class="section-title">Specialist Advisory <em>Within DIFC</em></h2>
+      <p class="difc-desc">MICS holds official Certified Service Provider (CSP) status from the DIFC Authority — allowing us to provide regulated company formation, DFSA compliance advisory, and specialist financial services exclusively within the Dubai International Financial Centre.</p>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <a href="difc.html" class="btn-primary">Explore DIFC Services →</a>
+        <a href="contact.html" class="btn-secondary" style="border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.8);">Book DIFC Consultation</a>
+      </div>
+    </div>
+    <div class="difc-right">
+      <div class="difc-item">
+        <div class="difc-item-num">01</div>
+        <div>
+          <div class="difc-item-title">Independent Legal System</div>
+          <div class="difc-item-desc">Common law jurisdiction — English law, internationally respected courts.</div>
+        </div>
+      </div>
+      <div class="difc-item">
+        <div class="difc-item-num">02</div>
+        <div>
+          <div class="difc-item-title">DFSA Regulation</div>
+          <div class="difc-item-desc">World-class financial regulation opening institutional capital networks globally.</div>
+        </div>
+      </div>
+      <div class="difc-item">
+        <div class="difc-item-num">03</div>
+        <div>
+          <div class="difc-item-title">0% Corporation Tax</div>
+          <div class="difc-item-desc">50-year tax guarantee — no corporate tax on qualifying DIFC income.</div>
+        </div>
+      </div>
+      <div class="difc-item">
+        <div class="difc-item-num">04</div>
+        <div>
+          <div class="difc-item-title">100% Foreign Ownership</div>
+          <div class="difc-item-desc">Full ownership with no UAE national sponsorship requirements.</div>
+        </div>
+      </div>
+      <div class="difc-item">
+        <div class="difc-item-num">05</div>
+        <div>
+          <div class="difc-item-title">Gateway to MENA Capital</div>
+          <div class="difc-item-desc">Strategic hub connecting East, West and South Asia institutional capital.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Testimonials -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow"><span></span>Client Perspectives</div>
+        <h2 class="section-title">What Our Clients <em>Say</em></h2>
+      </div>
+      <a href="contact.html" class="btn-secondary">Work With Us →</a>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">MICS handled our Corporate Tax registration and transfer pricing documentation flawlessly. Their team's knowledge of the FTA's requirements saved us significant time and potential penalties.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AK</div>
+          <div>
+            <div class="testimonial-name">Ahmad K.</div>
+            <div class="testimonial-role">CFO — Dubai-based Trading Group</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">From company formation to banking introductions to audit — MICS managed everything in one coordinated process. The DIFC setup was completed in 4 days through their CSP status.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SR</div>
+          <div>
+            <div class="testimonial-name">Sarah R.</div>
+            <div class="testimonial-role">CEO — DIFC Fund Manager</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">Their M&A advisory team structured and closed our AED 120M acquisition efficiently. Financial modelling, due diligence, and deal execution — all exceptional quality.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MH</div>
+          <div>
+            <div class="testimonial-name">Mohammed H.</div>
+            <div class="testimonial-role">Managing Director — PE Fund</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Band -->
+<div class="cta-band">
+  <div class="cta-container">
+    <div class="cta-left">
+      <h2>Ready to Get <em>Started?</em></h2>
+      <p>Book a free 45-minute advisory session. No commitment required. Our specialists will assess your requirements and recommend the right approach.</p>
+      <div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap;">
+        <a href="https://calendly.com/diya07/free-corporate-tax-advisory" class="btn-primary" style="background: var(--white); color: var(--ink);">Book Free Session →</a>
+        <a href="contact.html" class="btn-secondary" style="border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.9);">Send Enquiry</a>
+      </div>
+      <div style="display: flex; gap: 16px; margin-top: 32px; font-size: 12px; color: rgba(255,255,255,0.5);">
+        <span>DIFC CSP</span>
+        <span>•</span>
+        <span>24h Response</span>
+        <span>•</span>
+        <span>Free Consultation</span>
+      </div>
+    </div>
+    <div class="cta-form">
+      <div class="cta-form-title">Quick Enquiry</div>
+      <div class="cta-form-sub">Get a response from our team within 24 hours.</div>
+      <div class="cta-form-row">
+        <div class="cta-field">
+          <label class="cta-label">Name</label>
+          <input type="text" class="cta-input" placeholder="Your name">
+        </div>
+        <div class="cta-field">
+          <label class="cta-label">Email</label>
+          <input type="email" class="cta-input" placeholder="your@email.com">
+        </div>
+      </div>
+      <div class="cta-field full">
+        <label class="cta-label">Service Needed</label>
+        <select class="cta-select">
+          <option>Select a service...</option>
+          <option>Audit & Assurance</option>
+          <option>Tax Advisory</option>
+          <option>Risk Advisory</option>
+          <option>Corporate Finance / M&A</option>
+          <option>Business Setup</option>
+          <option>DIFC Services</option>
+          <option>Operational Compliance</option>
+        </select>
+      </div>
+      <div class="cta-field full">
+        <label class="cta-label">Brief Message</label>
+        <input type="text" class="cta-input" placeholder="Tell us what you need...">
+      </div>
+      <button class="cta-btn">Send Enquiry →</button>
+      <div class="cta-note">Encrypted & confidential. No spam.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-main">
+      <div>
+        <div class="footer-logo">
+          <img src="https://mics.ae/wp-content/uploads/2023/12/mics-logo.png" alt="MICS International">
+        </div>
+        <p class="footer-tagline">UAE's most comprehensive financial advisory firm — audit, tax, risk, corporate finance, business setup, and specialist DIFC advisory under one roof.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Tax & Audit</div>
+        <ul class="footer-links">
+          <li><a href="services/audit.html">Audit & Assurance</a></li>
+          <li><a href="services/risk.html">Risk Advisory</a></li>
+          <li><a href="services/indirect-tax.html">Indirect Tax (VAT)</a></li>
+          <li><a href="services/direct-tax.html">Direct Tax</a></li>
+          <li><a href="services/transfer-pricing.html">Transfer Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Finance & Setup</div>
+        <ul class="footer-links">
+          <li><a href="services/corporate-finance.html">Corporate Finance</a></li>
+          <li><a href="services/business-setup.html">Business Setup</a></li>
+          <li><a href="services/licensing.html">Licensing & PRO</a></li>
+          <li><a href="difc.html">DIFC Services (CSP)</a></li>
+          <li><a href="services/operational-compliance.html">Operational Compliance</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">MICS Group</div>
+        <ul class="footer-links">
+          <li><a href="index.html">MICS International</a></li>
+          <li><a href="wealth.html">MICS Wealth</a></li>
+          <li><a href="https://fundingpossibilities.com" target="_blank">Funding Possibilities ↗</a></li>
+          <li><a href="https://krorealty.com" target="_blank">Kairo Realty ↗</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copyright">© 2025 MICS International · A MICS Group Company · Dubai, UAE</div>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Sticky CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <a href="https://calendly.com/diya07/free-corporate-tax-advisory" class="sticky-btn" target="_blank">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    Book Free Advisory
+    <span class="sticky-pulse"></span>
+  </a>
+</div>
+
+<script>
+  // Navbar scroll effect
+  window.addEventListener('scroll', function() {
+    const sticky = document.getElementById('stickyCta');
+    if (window.scrollY > 700) {
+      sticky.classList.add('visible');
+    } else {
+      sticky.classList.remove('visible');
+    }
+
+    // Parallax effect for hero image
+    const heroImage = document.getElementById('parallaxImage');
+    if (heroImage) {
+      const scrollY = window.scrollY;
+      heroImage.style.transform = `translateY(${scrollY * 0.15}px)`;
+    }
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Simple counter animation for stats
+  function animateValue(element, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const value = Math.floor(progress * (end - start) + start);
+      if (element.innerHTML.includes('$')) {
+        element.innerHTML = '$' + value.toLocaleString() + '<span>M+</span>';
+      } else {
+        element.innerHTML = value.toLocaleString() + '<span>+</span>';
+      }
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
+  }
+
+  // Trigger counters when hero card comes into view
+  const heroCard = document.querySelector('.hero-card');
+  if (heroCard) {
+    const observerHero = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.hero-card-value').forEach(el => el.classList.add('counted'));
+          observerHero.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    observerHero.observe(heroCard);
+  }
+</script>
+</body>
+</html>
