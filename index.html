@@ -251,7 +251,7 @@ header {
 <!-- Main script -->
 <script>
 // --- CONFIG ---
-maptilersdk.config.apiKey = 'hJdbBzqEvo5ediAUVCy0';
+maptilersdk.config.apiKey = 'hJdbBzqEvo5ediAUVCy0'; // Replace with your own key if needed
 
 // --- DATA (from your areas_data_exact_v6_FULL_361.js) ---
 // We assume window.AREAS is already defined by the external script.
@@ -440,9 +440,9 @@ function drawEmirates() {
   });
 }
 
-// --- Find local feature with alias ---
+// --- Find local feature with alias (FIXED: now searches entire GeoJSON) ---
 function findLocalFeature(area) {
-  if (!localPack || area.emirate !== 'Abu Dhabi') return null;
+  if (!localPack) return null;
   const alias = NAME_ALIASES[area.name];
   if (alias) {
     return localPack.features.find(f => f.properties.community_name_en === alias);
