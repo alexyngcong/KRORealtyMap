@@ -498,7 +498,7 @@ function fitToGeom(geom) {
   return center;
 }
 
-// --- Main selection function ---
+// --- Main selection function (with retry if localPack not ready) ---
 async function selectArea(area, fly = true) {
   selectedArea = area;
   selectedEmirate = area.emirate;
@@ -506,6 +506,13 @@ async function selectArea(area, fly = true) {
   renderList();
   clearSelectionLayers();
   openPanel(area);
+
+  // If boundary data not loaded yet, retry after a short delay
+  if (!localPack) {
+    console.log('⏳ Boundary data loading, retrying...');
+    setTimeout(() => selectArea(area, fly), 200);
+    return;
+  }
 
   const localFeature = findLocalFeature(area);
   let geom = null;
