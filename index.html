@@ -498,7 +498,7 @@ function fitToGeom(geom) {
   return center;
 }
 
-// --- Main selection function (with retry if localPack not ready) ---
+// --- Main selection function (with robust readiness check) ---
 async function selectArea(area, fly = true) {
   selectedArea = area;
   selectedEmirate = area.emirate;
@@ -507,18 +507,25 @@ async function selectArea(area, fly = true) {
   clearSelectionLayers();
   openPanel(area);
 
-  // If boundary data not loaded yet, retry after a short delay
-  if (!localPack) {
-    console.log('⏳ Boundary data loading, retrying...');
-    setTimeout(() => selectArea(area, fly), 200);
-    return;
-  }
+  // Wait for boundary data and map style to be ready
+  const waitForReady = () => {
+    return new Promise(resolve => {
+      const check = () => {
+        if (localPack && isStyleReady && map.isStyleLoaded()) {
+          resolve();
+        } else {
+          setTimeout(check, 100);
+        }
+      };
+      check();
+    });
+  };
+  await waitForReady();
 
   const localFeature = findLocalFeature(area);
   let geom = null;
   if (localFeature) geom = localFeature.geometry;
   else if (area.lat && area.lng) {
-    // fallback to point marker
     const el = document.createElement('div');
     el.innerHTML = markerHTML(area);
     selectedMarker = new maptilersdk.Marker({ element: el.firstChild })
@@ -528,7 +535,7 @@ async function selectArea(area, fly = true) {
     return;
   }
 
-  if (geom && isStyleReady) {
+  if (geom) {
     const fc = { type: 'FeatureCollection', features: [{ type: 'Feature', properties: {}, geometry: geom }] };
     if (map.getSource('selected-boundary')) {
       try { map.getSource('selected-boundary').setData(fc); } catch(e) {
@@ -542,7 +549,6 @@ async function selectArea(area, fly = true) {
     const labelLayer = (map.getStyle().layers || []).find(l => l.type === 'symbol' && l.layout && l.layout['text-field']);
     const above3D = labelLayer ? labelLayer.id : undefined;
 
-    // Enhanced pedestal
     map.addLayer({
       id: 'selected-pedestal',
       type: 'fill-extrusion',
@@ -556,7 +562,6 @@ async function selectArea(area, fly = true) {
       }
     }, below3D);
 
-    // Glow layers
     map.addLayer({ id: 'selected-fill', type: 'fill', source: 'selected-boundary', paint: { 'fill-color': '#ffffff', 'fill-opacity': 0.006 } }, below3D);
     map.addLayer({ id: 'selected-fill-soft', type: 'fill', source: 'selected-boundary', paint: { 'fill-color': '#f7fbff', 'fill-opacity': 0.004 } }, below3D);
     map.addLayer({ id: 'selected-fill-tint', type: 'fill', source: 'selected-boundary', paint: { 'fill-color': '#d9ebff', 'fill-opacity': 0.003 } }, below3D);
@@ -570,7 +575,6 @@ async function selectArea(area, fly = true) {
     el.innerHTML = markerHTML(area);
     selectedMarker = new maptilersdk.Marker({ element: el.firstChild, anchor: 'bottom' }).setLngLat(center).addTo(map);
   } else {
-    // fallback to country center
     map.flyTo({ center: [54.45, 24.47], zoom: 11.8, pitch: 48, bearing: -10, duration: 1000 });
   }
 }
