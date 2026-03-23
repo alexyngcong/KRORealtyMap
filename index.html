@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kairo Property Intelligence — 3D Premium Abu Dhabi v13</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.maptiler.com/maptiler-sdk-js/v3.10.2/maptiler-sdk.css" rel="stylesheet" />
+<script src="https://cdn.maptiler.com/maptiler-sdk-js/v3.10.2/maptiler-sdk.umd.min.js"></script>
+<style>
+:root{--gold:#d8b46b;--gold-l:#f5e4bf;--bg:#05101d;--bg2:#08152a;--panel:rgba(5,12,26,.90);--panel2:rgba(7,18,35,.92);--line:rgba(255,255,255,.08);--text:#f6f9ff;--muted:#95a7c6;--muted2:#6f84a7;--Dubai:#eb8450;--AbuDhabi:#64b2ff;--Sharjah:#a784f7;--Ajman:#59d8a3;--UAQ:#f0c85e;--RAK:#ff7997;--Fujairah:#66d7ef;--sidebar-w:272px;--hover-open-delay:0ms;}
+*{box-sizing:border-box} html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font-family:'Aptos','Aptos Display','Segoe UI',sans-serif;overflow:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 15% 10%,rgba(100,178,255,.12),transparent 24%),radial-gradient(circle at 85% 8%,rgba(216,180,107,.12),transparent 18%),linear-gradient(180deg,#05101d 0%,#071423 52%,#04101b 100%);pointer-events:none;z-index:0}
+.app{position:relative;z-index:1;display:flex;flex-direction:column;height:100vh}
+header{height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border-bottom:1px solid rgba(216,180,107,.18);background:linear-gradient(180deg,rgba(5,12,26,.95),rgba(6,15,30,.85));backdrop-filter:blur(18px)}
+.brand{display:flex;align-items:center;gap:14px;min-width:0} .brand img{height:32px;filter:drop-shadow(0 6px 18px rgba(0,0,0,.28))} .brand-title{font-family:'Cormorant Garamond',serif;font-size:17px;letter-spacing:.15px;color:var(--gold-l)}
+.topbar{display:flex;align-items:center;gap:8px;min-width:0;flex:1;justify-content:flex-end} .pills{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;position:relative;z-index:10}
+.pill{border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.025);color:#dbe6f8;padding:6px 11px;border-radius:999px;font-size:10.5px;font-weight:600;cursor:pointer;transition:transform .24s ease,box-shadow .24s ease,background .24s ease,border-color .24s ease;line-height:1.05;white-space:nowrap} .pill:hover,.pill.on{transform:translateY(-1px);box-shadow:0 0 0 1px rgba(255,255,255,.04) inset,0 8px 18px rgba(0,0,0,.18)} .pill.on{background:rgba(80,255,170,.12)!important;border-color:rgba(80,255,170,.72)!important;color:#bfffe4!important;box-shadow:0 0 0 1px rgba(80,255,170,.18) inset,0 0 18px rgba(80,255,170,.22),0 8px 18px rgba(0,0,0,.18)!important;}
+.pill[data-e="all"]{color:var(--gold-l);border-color:rgba(201,168,76,.42)} .pill[data-e="Dubai"]{color:var(--Dubai);border-color:rgba(233,124,69,.42)} .pill[data-e="Abu Dhabi"]{color:var(--AbuDhabi);border-color:rgba(98,177,255,.42)} .pill[data-e="Sharjah"]{color:var(--Sharjah);border-color:rgba(165,123,247,.42)} .pill[data-e="Ajman"]{color:var(--Ajman);border-color:rgba(83,213,156,.42)} .pill[data-e="UAQ"]{color:var(--UAQ);border-color:rgba(239,195,81,.42)} .pill[data-e="RAK"]{color:var(--RAK);border-color:rgba(255,115,143,.42)} .pill[data-e="Fujairah"]{color:var(--Fujairah);border-color:rgba(95,213,238,.42)}
+.main{position:relative;flex:1;min-height:0;overflow:hidden}
+.sidebar{position:absolute;left:0;top:0;bottom:0;width:var(--sidebar-w);background:linear-gradient(180deg,rgba(7,16,34,.88),rgba(5,12,25,.92));border-right:1px solid rgba(255,255,255,.05);backdrop-filter:blur(16px);display:flex;flex-direction:column;transition:transform .44s cubic-bezier(.22,.8,.2,1),opacity .28s ease;z-index:8;box-shadow:12px 0 30px rgba(0,0,0,.20)}
+.sidebar.collapsed{transform:translateX(calc(-100% + 46px))} .sidebar.collapsed .sidebar-inner{opacity:0;pointer-events:none;transform:translateX(-8px)} .sidebar.collapsed .collapse-label{display:none}
+.sidebar-edge{position:absolute;right:-20px;top:50%;transform:translateY(-50%);width:38px;height:98px;border-radius:0 18px 18px 0;background:linear-gradient(180deg,rgba(216,180,107,.24),rgba(100,178,255,.24));display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,.18);opacity:.98}
+.sidebar-inner{display:flex;flex-direction:column;height:100%;transition:.22s}
+.search-wrap{padding:12px;border-bottom:1px solid var(--line)} .search-box{position:relative} .search-box input{width:100%;padding:12px 14px 12px 38px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);color:#fff;font-size:13px;outline:none} .search-box span{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.count-bar{padding:8px 14px;color:var(--muted);font-size:12px;border-bottom:1px solid var(--line)} .count-bar b{color:#fff}
+.area-list{flex:1;overflow:auto;padding:8px 0 18px} .area-list::-webkit-scrollbar{width:6px} .area-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:8px}
+.group-head{display:flex;align-items:center;gap:8px;padding:10px 14px 7px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:800;position:sticky;top:0;background:linear-gradient(180deg,rgba(7,16,34,.98),rgba(7,16,34,.92));backdrop-filter:blur(16px);z-index:1} .dot{width:9px;height:9px;border-radius:50%} .group-count{margin-left:auto;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.05);font-size:11px}
+.area-row{padding:13px 15px;border-left:2px solid transparent;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer;transition:background .24s ease,transform .24s ease;display:flex;align-items:center;justify-content:space-between;gap:10px} .area-row:hover{background:rgba(255,255,255,.03)} .area-row.active{border-left-color:var(--gold);background:linear-gradient(90deg,rgba(216,180,107,.12),rgba(216,180,107,.02) 60%,transparent)} .area-name{font-size:15px;font-weight:700;color:#f7fbff} .area-sub{font-size:12px;color:var(--muted);margin-top:4px} .empty{padding:30px 16px;color:var(--muted)}
+.map-wrap{position:absolute;inset:0;min-width:0} #map{position:absolute;inset:0} .map-glass{position:absolute;inset:0;background:radial-gradient(circle at center,rgba(255,255,255,.05),transparent 55%),linear-gradient(180deg,rgba(2,6,12,.20),rgba(2,6,12,.10) 28%,rgba(2,6,12,.22));pointer-events:none;z-index:1} .maptiler-control-container,.maplibregl-ctrl-bottom-right{z-index:5}
+.maplibregl-popup{display:none!important}
+.maplibregl-ctrl-group{border:none!important;background:rgba(9,18,35,.88)!important;backdrop-filter:blur(14px);box-shadow:0 12px 28px rgba(0,0,0,.24)!important;border-radius:14px!important;overflow:hidden} .maplibregl-ctrl button{width:34px!important;height:34px!important} .maplibregl-ctrl button span{filter:invert(1) brightness(1.9)} .maplibregl-ctrl button:hover{background:rgba(255,255,255,.05)!important}
+.detail-panel{position:absolute;top:14px;right:12px;width:300px;max-width:min(300px,calc(100vw - 120px));max-height:calc(100vh - 92px);overflow:auto;border-radius:22px;background:linear-gradient(180deg,rgba(6,16,34,.92),rgba(4,10,22,.94));border:1px solid rgba(255,255,255,.06);box-shadow:0 24px 72px rgba(0,0,0,.34);backdrop-filter:blur(18px);z-index:4;display:none} .detail-panel.open{display:block} .detail-panel::-webkit-scrollbar{width:5px} .detail-panel::-webkit-scrollbar-thumb{background:rgba(255,255,255,.10);border-radius:8px}
+.dp-hero{padding:15px 16px 11px;border-bottom:1px solid rgba(255,255,255,.06);background:radial-gradient(circle at 20% 12%,rgba(100,178,255,.16),transparent 30%),radial-gradient(circle at 88% 8%,rgba(216,180,107,.14),transparent 22%),linear-gradient(135deg,rgba(8,22,52,.96),rgba(2,8,21,.96))} .dp-flag{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.14);font-size:9px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:#8ec5ff;margin-bottom:10px} .dp-name{font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.02;font-weight:500} .dp-close{position:absolute;top:12px;right:12px;width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);color:#fff;cursor:pointer}
+.dp-sec{padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.06)} .dp-lbl{font-size:9px;color:var(--muted);font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:7px} .dp-text{font-size:11.5px;line-height:1.58;color:#d5def0;font-weight:400}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px} .stat{padding:9px 8px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);min-width:0} .stat .k{font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;line-height:1.25;font-weight:500} .stat .v{margin-top:5px;font-size:14px;font-weight:600;color:#fff;line-height:1.15;word-break:break-word} .stat .s{margin-top:2px;font-size:10px;color:#8fc8ff;line-height:1.2;font-weight:400}
+.tags{display:flex;flex-wrap:wrap;gap:10px} .tag{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-size:11px;font-weight:400} .highlights{display:grid;grid-template-columns:1fr 1fr;gap:10px} .highlight{padding:11px 12px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);font-size:11px;display:flex;align-items:center;gap:8px;font-weight:400} .hl-dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(180deg,var(--gold-l),var(--gold));box-shadow:0 0 14px rgba(216,180,107,.45)}
+.map-focus{display:none!important}
+.community-marker{min-width:140px;max-width:220px;padding:8px 12px;border-radius:14px;background:rgba(8,20,40,.92);border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(18px);box-shadow:0 12px 24px rgba(0,0,0,.24)} .community-marker .m-title{font-size:13px;font-weight:600} .community-marker .m-sub{margin-top:3px;font-size:10px;color:#92b4dc}
+@media (max-width:1100px){ .sidebar{width:260px} .detail-panel{width:400px;max-width:calc(100vw - 300px)} .stats{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:900px){ .main{flex-direction:column} .sidebar{width:100%;height:38vh} .detail-panel{left:12px;right:12px;width:auto;max-width:none;top:auto;bottom:12px;max-height:54vh} .map-focus{left:12px;right:12px;max-width:none} }
+
+/* v16 UI balance overrides */
+header{height:70px!important;padding:0 16px!important;border-bottom-color:rgba(216,180,107,.14)!important}
+.brand{gap:12px!important}.brand img{height:36px!important}.brand-title{font-size:18px!important;letter-spacing:.2px!important}
+.topbar{gap:10px!important}.pills{gap:8px!important;justify-content:flex-end!important}
+.pill{padding:7px 12px!important;font-size:11px!important;line-height:1!important;box-shadow:none!important}
+.pill:hover,.pill.on{box-shadow:0 6px 16px rgba(0,0,0,.16)!important}
+.pill.on{position:relative;border-color:#7dff9b!important;color:#dfffe7!important;box-shadow:0 0 0 1px rgba(125,255,155,.22) inset,0 0 22px rgba(125,255,155,.16),0 8px 18px rgba(0,0,0,.18)!important;background:linear-gradient(180deg,rgba(125,255,155,.08),rgba(125,255,155,.03))!important} .pill.on::after{content:"";position:absolute;inset:-1px;border-radius:999px;pointer-events:none;box-shadow:0 0 18px rgba(125,255,155,.22)}
+
+.sidebar{transition:width .34s cubic-bezier(.2,.8,.2,1),transform .34s cubic-bezier(.2,.8,.2,1)!important;will-change:width,transform;box-shadow:14px 0 28px rgba(0,0,0,.16)!important}
+.sidebar.collapsed{width:46px!important}.sidebar.collapsed .sidebar-inner{transform:translateX(-8px)!important}
+.sidebar-toggle{position:absolute;right:-20px!important;top:50%;transform:translateY(-50%);width:38px!important;height:98px!important;border-radius:0 18px 18px 0!important;background:rgba(255,255,255,.12)!important;font-size:18px!important;transition:background .08s ease,opacity .08s ease;opacity:1;cursor:pointer}.sidebar-toggle:hover{background:rgba(255,255,255,.18)!important}
+.search-wrap{padding:14px 14px 10px!important}.search-box span{left:13px!important;font-size:13px!important}.search-box input{padding:12px 14px 12px 36px!important;font-size:13px!important;border-radius:16px!important}
+.count-bar{padding:10px 16px!important;font-size:11px!important}.group-head{padding:12px 16px 6px!important;font-size:10px!important;letter-spacing:1.8px!important}.group-count{padding:3px 8px!important;font-size:10px!important}
+.area-row{padding:13px 16px!important;transition:background .18s ease,border-color .18s ease,transform .18s ease!important}.area-name{font-size:13px!important;line-height:1.25!important}.area-sub{font-size:11px!important;margin-top:3px!important}
+.detail-panel{top:14px!important;right:14px!important;width:300px!important;max-width:min(300px,calc(100vw - 190px))!important;max-height:calc(100vh - 100px)!important;overflow:auto!important;border-radius:22px!important;box-shadow:0 20px 54px rgba(0,0,0,.30)!important}
+.dp-hero{padding:14px 15px 10px!important}.dp-flag{padding:4px 9px!important;font-size:8px!important;font-weight:600!important}.dp-name{font-size:16px!important;line-height:1.03!important;margin-top:4px!important;font-weight:500!important}.dp-close{top:12px!important;right:12px!important;width:28px!important;height:28px!important;font-size:13px!important}
+.dp-sec{padding:10px 14px!important}.dp-lbl{font-size:9px!important;letter-spacing:1.4px!important;margin-bottom:7px!important}.dp-text{font-size:11.5px!important;line-height:1.56!important;font-weight:400!important}
+.stats{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}.stat{padding:9px 8px!important;border-radius:14px!important;min-width:0!important}.stat .k{font-size:8px!important;line-height:1.25!important;font-weight:500!important}.stat .v{font-size:13px!important;line-height:1.12!important;font-weight:600!important;word-break:break-word!important}.stat .s{font-size:9.5px!important;line-height:1.2!important;font-weight:400!important}
+.tags{gap:8px!important}.tag{padding:8px 11px!important;font-size:11px!important}.highlights{gap:8px!important}.highlight{padding:10px 11px!important;border-radius:14px!important;font-size:11.5px!important;gap:8px!important;line-height:1.3!important}.hl-dot{width:8px!important;height:8px!important}
+.mapboxgl-ctrl-group{background:rgba(8,18,36,.82)!important;border:1px solid rgba(255,255,255,.08)!important;border-radius:14px!important;box-shadow:0 10px 22px rgba(0,0,0,.18)!important}.mapboxgl-ctrl button{width:34px!important;height:34px!important}
+.sidebar,.detail-panel,.pill,.area-row{transform:translateZ(0)}
+@media (max-width:1180px){.detail-panel{width:296px!important;max-width:min(296px,calc(100vw - 180px))!important}.stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media (max-width:980px){header{height:auto!important;padding:10px 12px!important;gap:10px!important;align-items:flex-start!important;flex-direction:column!important}.topbar{width:100%!important;justify-content:space-between!important}.detail-panel{left:10px!important;right:10px!important;width:auto!important;max-width:none!important;top:auto!important;bottom:10px!important;max-height:56vh!important}.dp-name{font-size:18px!important}}
+
+
+.map-shell{position:relative;flex:1;min-width:0}
+#map{position:absolute;inset:0}
+@media (max-width:980px){
+  header{height:auto;padding:10px 12px;align-items:flex-start;gap:10px;flex-wrap:wrap}
+  .brand img{height:30px}.brand-title{font-size:16px}
+  .topbar{width:100%;justify-content:flex-start}.pills{gap:5px;overflow-x:auto;max-width:100%;padding-bottom:2px}
+  .pill{font-size:10px;padding:6px 9px}
+  .sidebar{width:240px}.sidebar.collapsed{width:42px}
+  .detail-panel{width:290px;max-width:calc(100vw - 36px);top:12px;right:12px;max-height:calc(100vh - 96px)}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+
+.pill.on{position:relative;z-index:11;}
+.pill.on::after{content:"";position:absolute;inset:-2px;border-radius:999px;box-shadow:0 0 18px currentColor;opacity:.16;pointer-events:none}
+.sidebar{will-change:width,transform,opacity}
+
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand"><img src="https://krorealty.com/logo.png" alt="Kairo logo"><div class="brand-title">Property Intelligence</div></div>
+  <div class="topbar"><div class="pills" id="pills">
+    <button class="pill on" data-e="all">All Emirates</button>
+    <button class="pill" data-e="Dubai">Dubai</button>
+    <button class="pill" data-e="Abu Dhabi">Abu Dhabi</button>
+    <button class="pill" data-e="Sharjah">Sharjah</button>
+    <button class="pill" data-e="Ajman">Ajman</button>
+    <button class="pill" data-e="UAQ">Umm Al Quwain</button>
+    <button class="pill" data-e="RAK">Ras Al Khaimah</button>
+    <button class="pill" data-e="Fujairah">Fujairah</button>
+  </div></div>
+</header>
+<div class="main">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
+      <div class="search-wrap"><div class="search-box"><span>⌕</span><input id="searchInput" placeholder="Search communities, districts, islands..." /></div></div>
+      <div class="count-bar"><b id="countValue">0</b> areas shown</div>
+      <div class="area-list" id="areaList"></div>
+    </div>
+    <div class="sidebar-edge" id="sidebarToggle">‹</div>
+  </aside>
+  <section class="map-wrap">
+    <div id="map"></div>
+    <div class="map-glass"></div>
+    
+    <div class="detail-panel" id="detailPanel"><button class="dp-close" id="closePanel">×</button><div id="panelContent"></div></div>
+  </section>
+</div>
+</div>
+<script>
+maptilersdk.config.apiKey = 'hJdbBzqEvo5ediAUVCy0';
+try{ maptilersdk.config.language = maptilersdk.Language.ENGLISH; }catch(e){}
+const COMMUNITY_DATA={"Dubai": ["Downtown Dubai", "Business Bay", "Dubai Marina", "Jumeirah Beach Residence (JBR)", "Palm Jumeirah", "Jumeirah 1", "Jumeirah 2", "Jumeirah 3", "Jumeirah Village Circle (JVC)", "Jumeirah Village Triangle (JVT)", "Jumeirah Lakes Towers (JLT)", "Jumeirah Golf Estates", "Jumeirah Park", "Jumeirah Islands", "Arabian Ranches 1", "Arabian Ranches 2", "Arabian Ranches 3", "Dubai Hills Estate", "Emirates Hills", "Emirates Living", "The Springs", "The Meadows", "The Lakes", "The Greens", "The Views", "Al Barsha 1", "Al Barsha 2", "Al Barsha 3", "Al Barsha South", "Al Quoz 1", "Al Quoz 2", "Al Quoz 3", "Al Quoz 4", "Al Wasl", "Al Safa 1", "Al Safa 2", "Al Manara", "Al Sufouh 1", "Al Sufouh 2", "Al Mizhar 1", "Al Mizhar 2", "Al Khawaneej 1", "Al Khawaneej 2", "Al Warqa 1", "Al Warqa 2", "Al Warqa 3", "Al Warqa 4", "Al Warqa 5", "Al Nahda 1", "Al Nahda 2", "Al Qusais 1", "Al Qusais 2", "Al Qusais 3", "Al Twar 1", "Al Twar 2", "Al Twar 3", "Al Rashidiya", "Al Muraqqabat", "Al Rigga", "Al Mamzar", "Al Karama", "Al Mankhool", "Al Jafiliya", "Al Satwa", "Al Kifaf", "Al Hamriya", "Al Garhoud", "Al Jaddaf", "Oud Metha", "Oud Al Muteena", "Bur Dubai", "Deira", "Naif", "Port Saeed", "Corniche Deira", "Muhaisnah 1", "Muhaisnah 2", "Muhaisnah 3", "Muhaisnah 4", "Mirdif", "Nad Al Hamar", "Nad Al Sheba 1", "Nad Al Sheba 2", "Nad Al Sheba 3", "Nad Al Sheba 4", "Ras Al Khor Industrial", "Za'abeel 1", "Za'abeel 2", "DIFC", "City Walk", "La Mer", "Bluewaters Island", "Dubai Creek Harbour", "Dubai Harbour", "Dubai South", "Dubai Investment Park 1", "Dubai Investment Park 2", "Discovery Gardens", "Ibn Battuta Gate", "Motor City", "Sports City", "Studio City", "Production City", "Silicon Oasis", "Academic City", "International City", "Dragon City", "Liwan", "Dubailand", "Mudon", "Reem Community", "Tilal Al Ghaf", "Damac Hills 1", "Damac Hills 2", "Akoya Oxygen", "Town Square", "Serena", "Villanova", "Nshama Town Square", "Sobha Hartland", "Mohammed Bin Rashid City", "Meydan", "Ras Al Khor", "Festival City", "Jebel Ali Village", "Jebel Ali Industrial", "Palm Jebel Ali", "The World Islands", "Deira Islands", "BurJuman Area", "Wadi Al Safa 2", "Wadi Al Safa 3", "Wadi Al Safa 4", "Wadi Al Safa 5", "Wadi Al Safa 6", "Wadi Al Safa 7", "Layan Community", "Al Furjan", "The Valley", "Emaar Beachfront", "Dubai Design District", "The Sustainable City", "Remraam", "Arjan"], "Abu Dhabi": ["Al Reem Island", "Al Maryah Island", "Yas Island", "Saadiyat Island", "Al Raha Beach", "Al Raha Gardens", "Khalifa City A", "Khalifa City B", "Mohammed Bin Zayed City", "Masdar City", "Al Reef", "Al Ghadeer", "Al Shamkha", "Shakhbout City", "Zayed City", "Al Mushrif", "Al Karamah", "Al Manhal", "Al Nahyan", "Al Rowdah", "Al Zahiyah", "Al Khalidiyah", "Al Bateen", "Al Markaziyah", "Al Corniche", "Al Hosn", "Al Mina", "Madinat Zayed", "Al Muroor", "Al Wahdah", "Al Manaseer", "Al Falah", "Baniyas East", "Baniyas West", "Al Samha", "Al Wathba", "Al Shahama", "Al Rahba", "Al Bahia", "Al Jubail Island", "Hudayriyat Island", "Sas Al Nakhl", "Al Zaab", "Officers City", "Delma Island", "Al Ain Al Jimi", "Al Ain Al Muwaiji", "Al Ain Zakher", "Al Ain Al Towayya"], "Sharjah": ["Al Majaz 1", "Al Majaz 2", "Al Majaz 3", "Al Nahda Sharjah", "Al Khan", "Al Qasimia", "Al Taawun", "Al Mamzar Sharjah", "Al Yarmook", "Al Rahmaniya 1", "Al Rahmaniya 2", "Al Rahmaniya 3", "Al Rahmaniya 4", "Al Rahmaniya 5", "Al Rahmaniya 6", "Al Rahmaniya 7", "Al Rahmaniya 8", "Al Zahia", "Muwaileh Commercial", "University City", "Al Jurf", "Al Falaj", "Al Ghafia", "Al Butina", "Al Rigaibah", "Al Gulayaa", "Al Ramla", "Halwan", "Samnan", "Industrial Area 1", "Industrial Area 2", "Industrial Area 3", "Industrial Area 4", "Industrial Area 5", "Industrial Area 6", "Industrial Area 7", "Industrial Area 8", "Industrial Area 9", "Industrial Area 10", "Industrial Area 11", "Industrial Area 12", "Industrial Area 13", "Industrial Area 14", "Industrial Area 15", "Industrial Area 16", "Industrial Area 17", "Industrial Area 18", "Abu Shagara", "Al Gharb", "Al Mirgab", "Rolla Area", "Al Layyah", "Al Qadisiya", "Al Nud", "Al Wahda", "Sharjah Waterfront City", "Aljada", "Tilal City", "Nasma Residences", "Hoshi", "Suyoh", "Al Nouf 1", "Al Nouf 2", "Al Nouf 3", "Muelih", "Wasit", "Al Qulayaa", "Khor Fakkan", "Kalba", "Dibba Al Hisn"], "Ajman": ["Al Nuaimia 1", "Al Nuaimia 2", "Al Nuaimia 3", "Al Rashidiya 1", "Al Rashidiya 2", "Al Rashidiya 3", "Al Rumaila 1", "Al Rumaila 2", "Al Rumaila 3", "Al Rawdah 1", "Al Rawdah 2", "Al Rawdah 3", "Al Jurf 1", "Al Jurf 2", "Al Jurf 3", "Al Mowaihat 1", "Al Mowaihat 2", "Al Mowaihat 3", "Emirates City", "Al Ameera Village", "Ajman Uptown", "Al Hamidiya 1", "Al Hamidiya 2", "Al Sawan", "Al Karama Ajman", "Al Naemiyah", "Ajman Corniche", "Al Bustan", "Garden City", "Al Khor", "Masfout", "Manama"], "UAQ": ["UAQ Marina", "Al Raas", "Al Salam City", "Al Hamra UAQ", "Al Khor UAQ", "Falaj Al Mualla", "Al Raudah", "Al Maidan", "Old Town UAQ", "Industrial Area UAQ", "Al Salamah", "Al Dour", "Siniya Island"], "RAK": ["Al Hamra Village", "Mina Al Arab", "Al Marjan Island", "Bayah", "Al Nakheel", "Al Mamourah", "Al Qusaidat", "Al Jazeera Al Hamra", "Al Dhait North", "Al Dhait South", "Al Seer", "Sidroh", "Ras Al Khaimah City Center", "Dafan Al Nakheel", "Khuzam", "Ghayl", "Al Rams", "Sha'am", "Julfar", "Digdaga", "Al Azra", "Al Uraibi", "Wadi Shah", "Al Muntasir", "Al Qawasim Corniche", "Al Mairid", "Al Naseem", "Al Hamraniyah", "Khatt", "Al Kharran", "Wadi Al Qawr"], "Fujairah": ["Fujairah City Center", "Sakamkam", "Al Faseel", "Al Tawyeen", "Al Gurfa", "Al Hilal City", "Merashid", "Al Sharyah", "Qidfa", "Murbah", "Khor Fakkan Shared", "Dibba Al Fujairah", "Al Aqah", "Masafi", "Al Bithnah", "Mirbah", "Al Hayl", "Rugaylat", "Al Madhab", "Wadi Al Hayl", "Al Nakheel Fujairah", "Fujairah Free Zone Area"]}
+const AREA_DETAILS = [
+  /* ── DUBAI ── */
+  { name:'Downtown Dubai', emirate:'Dubai', price:2800, type:'F', growth:'+12%', desc:'The crown jewel of Dubai. Home to Burj Khalifa, Dubai Mall, Dubai Fountain. Ultra-premium residential towers with iconic skyline views. Attracts high-net-worth buyers globally.', props:['Luxury Apartments','Penthouses','Hotel Residences'], features:['Burj Khalifa Views','Metro Access','World-Class Retail','5-Star Dining'], minPrice:1800000, maxPrice:80000000 },
+  { name:'Business Bay', emirate:'Dubai', price:1850, type:'F', growth:'+9%', desc:'Dubai\'s premier business and residential district. Canal-front towers, trendy cafes, and proximity to Downtown make it highly sought after for young professionals and investors.', props:['Apartments','Offices','Mixed-Use'], features:['Dubai Canal Views','Metro Access','Business Hub','Waterfront Dining'], minPrice:800000, maxPrice:25000000 },
+  { name:'Dubai Marina', emirate:'Dubai', price:1950, type:'F', growth:'+10%', desc:'The largest man-made marina in the world. A vibrant waterfront community with yachts, promenades, world-class dining. Popular with expats and investors. Non-stop lifestyle.', props:['Marina-View Apartments','Penthouses','Townhouses'], features:['Marina Views','Beach Access','Metro','Yacht Club'], minPrice:900000, maxPrice:30000000 },
+  { name:'Palm Jumeirah', emirate:'Dubai', price:3600, type:'F', growth:'+18%', desc:'The iconic palm-shaped island. Dubai\'s most exclusive address with beach villas, luxury apartments and 5-star resorts. Unmatched demand from HNWIs worldwide.', props:['Beachfront Villas','Signature Apartments','Hotel Residences'], features:['Private Beach','Sea Views','Nakheel Mall','5-Star Resorts'], minPrice:2500000, maxPrice:500000000 },
+  { name:'JBR (Jumeirah Beach Residence)', emirate:'Dubai', price:2150, type:'F', growth:'+11%', desc:'The Walk at JBR is one of the most popular beach destinations. A lively open-air promenade with shops, cafes and direct beach access. Great rental yields.', props:['Beachfront Apartments','Retail Spaces'], features:['The Walk','Private Beach','Beach Fitness','Water Sports'], minPrice:1200000, maxPrice:20000000 },
+  { name:'Jumeirah Village Circle', emirate:'Dubai', price:960, type:'F', growth:'+8%', desc:'One of Dubai\'s fastest growing affordable communities. Excellent ROI for investors. Family-friendly with parks, schools and easy access to major highways.', props:['Apartments','Townhouses','Villas'], features:['Parks','Schools','Easy Highway Access','High ROI'], minPrice:400000, maxPrice:5000000 },
+  { name:'Jumeirah Village Triangle', emirate:'Dubai', price:920, type:'F', growth:'+7%', desc:'Quiet gated community adjacent to JVC. Low-rise villas and townhouses in a suburban setting. Strong rental demand from families seeking space at affordable prices.', props:['Villas','Townhouses','Apartments'], features:['Gated Community','Parks','Family-Friendly'], minPrice:500000, maxPrice:8000000 },
+  { name:'Dubai Hills Estate', emirate:'Dubai', price:1750, type:'F', growth:'+14%', desc:'Master-planned luxury community by Emaar. Golf course residences, lush landscaping, Dubai Hills Mall. A serene escape within the city with premium schools and hospitals.', props:['Golf Villas','Townhouses','Apartments'], features:['18-Hole Golf Course','Dubai Hills Mall','Schools','Parks'], minPrice:1200000, maxPrice:50000000 },
+  { name:'Al Furjan', emirate:'Dubai', price:980, type:'F', growth:'+7%', desc:'Affordable villa and apartment community near Discovery Gardens and Expo. Good metro connectivity. Ideal for families and first-time buyers. Nakheel master-planned development.', props:['Villas','Townhouses','Apartments'], features:['Metro Access','Schools','Community Centers'], minPrice:500000, maxPrice:6000000 },
+  { name:'Discovery Gardens', emirate:'Dubai', price:750, type:'F', growth:'+5%', desc:'One of Dubai\'s most affordable residential communities. Themed clusters with Mediterranean and Zen-style architecture. High occupancy rates, popular with mid-income residents.', props:['Apartments'], features:['Metro Access','Low Cost','High Occupancy','Gardens'], minPrice:280000, maxPrice:1500000 },
+  { name:'Dubai South (Expo City)', emirate:'Dubai', price:920, type:'F', growth:'+16%', desc:'The future urban destination near Al Maktoum Airport. Hub of Expo 2020 legacy. Largest urban master plan in Dubai. Massive infrastructure investment. Al Maktoum airport to be world\'s largest.', props:['Apartments','Townhouses','Villas','Commercial'], features:['Expo City','Near Al Maktoum Airport','Urban Master Plan','Business Hub'], minPrice:450000, maxPrice:8000000 },
+  { name:'Sobha Hartland', emirate:'Dubai', price:2200, type:'F', growth:'+13%', desc:'Ultra-luxury waterfront community by Sobha. Premium construction quality. Green community with 8M sq ft of parks and water. Direct access to Ras Al Khor Wildlife Sanctuary.', props:['Luxury Villas','Waterfront Apartments'], features:['Hartland Mall','International Schools','Green Spaces','Creek Views'], minPrice:1500000, maxPrice:60000000 },
+  { name:'MBR City', emirate:'Dubai', price:2000, type:'F', growth:'+12%', desc:'Mohammed Bin Rashid City — one of Dubai\'s largest mixed-use developments. Meydan Racecourse, Meydan One Mall, waterfall. Premium suburban living with urban amenities.', props:['Villas','Apartments','Palaces'], features:['Meydan Racecourse','Crystal Lagoon','Meydan Mall','Schools'], minPrice:1000000, maxPrice:100000000 },
+  { name:'Creek Harbour', emirate:'Dubai', price:1950, type:'F', growth:'+11%', desc:'New waterfront development along Dubai Creek. Tower Creek Beach, Cultural District, future Creek Tower (taller than Burj Khalifa). High appreciation potential.', props:['Waterfront Apartments','Penthouses'], features:['Creek Tower Site','Beach Club','Cultural District','Dining'], minPrice:1100000, maxPrice:30000000 },
+  { name:'Emaar Beachfront', emirate:'Dubai', price:2900, type:'F', growth:'+15%', desc:'Private island community by Emaar between Palm Jumeirah and JBR. Limited collection of apartments with direct beach access. Exclusive marina. Extremely high demand.', props:['Beachfront Apartments','Penthouses'], features:['Private Beach','Marina','Sea Views','Limited Supply'], minPrice:1800000, maxPrice:40000000 },
+  { name:'Bluewaters Island', emirate:'Dubai', price:3100, type:'F', growth:'+13%', desc:'Man-made island hosting Ain Dubai (world\'s largest observation wheel). Upscale residences, luxury hotels, The Wharf. Ultra-premium island living with unobstructed sea views.', props:['Luxury Apartments','Penthouses'], features:['Ain Dubai','Sea Views','The Wharf','Boutique Retail'], minPrice:2000000, maxPrice:50000000 },
+  { name:'Dubai Harbour', emirate:'Dubai', price:2550, type:'F', growth:'+14%', desc:'New landmark marine destination with a 1,100 berth marina. Premium residential towers, luxury hotels. Dubai Lighthouse to be tallest lighthouse globally. Strong waterfront appeal.', props:['Waterfront Apartments','Serviced Residences'], features:['1100 Berth Marina','Lighthouse','Beach','Luxury Retail'], minPrice:1500000, maxPrice:35000000 },
+  { name:'JLT (Jumeirah Lakes Towers)', emirate:'Dubai', price:1400, type:'F', growth:'+8%', desc:'Business and residential district with lakefront towers. Free zone offices alongside residential. Great value with metro connectivity. Strong rental returns for investors.', props:['Lake-View Apartments','Offices','Retail'], features:['Metro Access','Lakes','Business Hub','Dining'], minPrice:700000, maxPrice:10000000 },
+  { name:'Emirates Hills', emirate:'Dubai', price:4200, type:'F', growth:'+16%', desc:'Dubai\'s most exclusive gated villa community — the "Beverly Hills of Dubai". Multi-million dollar golf villas overlooking Montgomerie Golf Course. Ultra-HNWI clientele only.', props:['Ultra-Luxury Villas','Golf Mansions'], features:['Golf Course Views','Gated 24/7','Lake Views','Extreme Privacy'], minPrice:15000000, maxPrice:400000000 },
+  { name:'The Springs / Meadows', emirate:'Dubai', price:1700, type:'F', growth:'+10%', desc:'Established Emaar villa communities. Lake views, mature landscaping, top-tier schools. One of the most family-friendly communities in Dubai. Very limited supply driving prices up.', props:['Villas','Townhouses'], features:['Lakes','Emaar Community','Top Schools','Parks'], minPrice:2500000, maxPrice:20000000 },
+  { name:'Arabian Ranches', emirate:'Dubai', price:1550, type:'F', growth:'+11%', desc:'Emaar\'s flagship villa community. Three phases offer various villa sizes. Arabian-themed architecture, golf course, polo fields. Strong resale demand, especially for upgraded properties.', props:['Villas','Townhouses'], features:['Golf Course','Polo Club','Dubai Polo Equestrian','Retail'], minPrice:2000000, maxPrice:30000000 },
+  { name:'Arabian Ranches 2', emirate:'Dubai', price:1650, type:'F', growth:'+11%', desc:'Second phase of the iconic Arabian Ranches. Features Reel Cinemas, Ranches Souk retail. Similar architecture with improved layouts. High demand from families upgrading within the community.', props:['Villas','Townhouses'], features:['Cinema','Community Retail','Schools','Cycling Tracks'], minPrice:2200000, maxPrice:20000000 },
+  { name:'Arabian Ranches 3', emirate:'Dubai', price:1450, type:'F', growth:'+12%', desc:'Latest phase of Arabian Ranches. Largest lagoon community in Dubai with a 1.5km Crystal Lagoon. Modern villa designs, water sports, beach clubs. High capital growth.', props:['Villas','Townhouses'], features:['Crystal Lagoon','Water Sports','Beach Club','Grand Center Park'], minPrice:1800000, maxPrice:15000000 },
+  { name:'DAMAC Hills', emirate:'Dubai', price:1100, type:'F', growth:'+9%', desc:'TRUMP International Golf Course at the center of DAMAC Hills. Highly branded development with various apartment and villa sub-communities. Strong rental income from golf-lovers.', props:['Golf Villas','Apartments','Townhouses'], features:['Trump Golf Course','Malibu Bay','Retail Hub','Akoya Park'], minPrice:700000, maxPrice:25000000 },
+  { name:'DAMAC Hills 2 (Akoya)', emirate:'Dubai', price:800, type:'F', growth:'+8%', desc:'Affordable villa community in Dubailand. Townhouses and villas with the Malibu Beach lagoon. Very popular with first-time villa buyers. Good ROI due to low entry price.', props:['Townhouses','Villas'], features:['Malibu Lagoon','Amenities Hub','Cycling Tracks','Green Parks'], minPrice:500000, maxPrice:6000000 },
+  { name:'Motor City', emirate:'Dubai', price:900, type:'F', growth:'+7%', desc:'Motorsport-themed community with Dubai Autodrome at its heart. Mix of apartments and villas. Good schools, community mall, quiet suburban feel. Solid rental demand from families.', props:['Apartments','Villas','Townhouses'], features:['Dubai Autodrome','Community Mall','Schools','Parks'], minPrice:500000, maxPrice:5000000 },
+  { name:'Sports City', emirate:'Dubai', price:860, type:'F', growth:'+7%', desc:'World-class sports hub with ICC cricket stadium, Els Golf Club, Manchester City football academy. Diverse residential options. Growing community with expanding amenities.', props:['Apartments','Villas'], features:['ICC Stadium','Golf Course','Sports Academies','Retail'], minPrice:430000, maxPrice:4000000 },
+  { name:'Barsha Heights (TECOM)', emirate:'Dubai', price:1100, type:'F', growth:'+7%', desc:'Free zone residential and commercial district by TECOM. Home to media and internet city workers. Convenient metro access, affordable compared to nearby JBR/Marina. Strong rental demand.', props:['Apartments','Serviced Apartments','Offices'], features:['Metro Access','Business Hub','Affordable Entry','Easy Commute'], minPrice:500000, maxPrice:5000000 },
+  { name:'Dubai Silicon Oasis', emirate:'Dubai', price:840, type:'F', growth:'+6%', desc:'Technology free zone with integrated residential community. Self-sustained with retail, schools, clinics. Affordable units with growing tech industry workforce demand.', props:['Apartments','Villas','Offices'], features:['Tech Free Zone','Schools','Retail','Self-Sustained'], minPrice:380000, maxPrice:4000000 },
+  { name:'Mirdif', emirate:'Dubai', price:850, type:'M', growth:'+6%', desc:'Established residential area popular with Arab and Emirati families. Quiet, spacious community feel. Mirdif City Centre, parks, villas with large plots. Leasehold for non-GCC nationals in some areas.', props:['Villas','Apartments'], features:['Mirdif City Centre','Mushrif Park','Schools','Quiet Area'], minPrice:1000000, maxPrice:10000000 },
+  { name:'Deira', emirate:'Dubai', price:700, type:'M', growth:'+5%', desc:'Old Dubai\'s historic commercial heart. Gold and Spice Souks, dhow wharfage, Creek views. Affordable entry prices. Strong rental demand from large working population. Naif, Al Rigga area.', props:['Apartments','Commercial','Hotels'], features:['Gold Souk','Spice Souk','Dubai Creek','Affordable'], minPrice:300000, maxPrice:5000000 },
+  { name:'Bur Dubai', emirate:'Dubai', price:740, type:'M', growth:'+5%', desc:'Historic heart of old Dubai. Al Fahidi, Dubai Museum, textile souk. Busy commercial district transitioning to a tourism hub. Strong rental demand from hospitality and trade workers.', props:['Apartments','Heritage Hotels','Commercial'], features:['Al Fahidi','Dubai Museum','Al Seef Walk','Creek Views'], minPrice:350000, maxPrice:4000000 },
+  { name:'International City', emirate:'Dubai', price:500, type:'F', growth:'+4%', desc:'Most affordable freehold community in Dubai. Country-themed clusters (China, England, Greece, etc.). Very high rental yields due to low prices and constant demand from budget renters.', props:['Apartments'], features:['Highest ROI','Affordable','Dragon Mart','Easy Access'], minPrice:200000, maxPrice:1200000 },
+  { name:'Dubai Festival City', emirate:'Dubai', price:1550, type:'M', growth:'+9%', desc:'Waterfront lifestyle destination by Al-Futtaim. Festival City Mall, IKEA, Intercontinental hotels, Creek views. Premium apartments with great amenities and established community feel.', props:['Waterfront Apartments','Hotels','Retail'], features:['Festival City Mall','Creek Views','IKEA','Hotels'], minPrice:900000, maxPrice:12000000 },
+  { name:'Al Jaddaf', emirate:'Dubai', price:1350, type:'F', growth:'+10%', desc:'Emerging waterfront district along Dubai Creek. Culture Village proximity, Dubai Frame nearby. Mix of affordable and premium towers. Significant infrastructure upgrades underway.', props:['Apartments','Hotel Apartments'], features:['Creek Views','Metro Access','Culture Village','Affordable Premium'], minPrice:600000, maxPrice:10000000 },
+  { name:'City Walk', emirate:'Dubai', price:2600, type:'M', growth:'+12%', desc:'Ultra-cool lifestyle destination by Meraas. Low-rise European-inspired design in the heart of Dubai. Green Spine outdoor space, premium branded residences above luxury retail and F&B.', props:['Premium Apartments','Serviced Residences'], features:['Outdoor Mall','European Design','Luxury F&B','Central Location'], minPrice:1500000, maxPrice:20000000 },
+  { name:'Tilal Al Ghaf', emirate:'Dubai', price:1400, type:'F', growth:'+13%', desc:'Majid Al Futtaim\'s premier community. 7km Hana Lake, pristine sandy beach, community parks. Contemporary Arabic architecture. One of Dubai\'s fastest selling communities in 2023-2024.', props:['Villas','Townhouses','Mansions'], features:['Hana Lake','Private Beach','Beach Club','7km Waterway'], minPrice:1500000, maxPrice:35000000 },
+  { name:'Nad Al Sheba', emirate:'Dubai', price:1850, type:'F', growth:'+14%', desc:'Ultra-luxurious villa community by Meraas adjacent to Meydan. Very limited collection of palatial villas. NAS Sports Complex, world-class amenities, 5.5km of cycling and running tracks.', props:['Luxury Villas','Mansions'], features:['NAS Sports Complex','Meydan Adjacent','Cycling Tracks','Exclusive'], minPrice:5000000, maxPrice:80000000 },
+  { name:'Dubai Investment Park (DIP)', emirate:'Dubai', price:700, type:'M', growth:'+6%', desc:'Large free zone with residential component. Very affordable for Dubai. Close to Expo City / Dubai South. Ideal for investment due to proximity to upcoming Al Maktoum Airport expansion.', props:['Villas','Apartments','Warehouses'], features:['Free Zone','Airport Proximity','Affordable','Expo Access'], minPrice:300000, maxPrice:5000000 },
+  { name:'The Valley', emirate:'Dubai', price:880, type:'F', growth:'+9%', desc:'Emaar\'s garden-themed community with golden beaches and lush parks. Away from city noise yet connected via Al Ain Road. Affordable townhouses and villas with excellent Emaar quality.', props:['Townhouses','Villas'], features:['Golden Beach','Central Park','Sports Village','Kids Dale'], minPrice:700000, maxPrice:6000000 },
+  { name:'Jebel Ali Village', emirate:'Dubai', price:660, type:'M', growth:'+5%', desc:'Large free zone residential complex adjacent to Jebel Ali Port — world\'s largest man-made port. Ideal for port employees and logistics professionals. Stable rental market with government ties.', props:['Villas','Apartments'], features:['Jebel Ali Port','Free Zone','Stable Rental','Sea Views'], minPrice:350000, maxPrice:5000000 },
+  { name:'DIFC', emirate:'Dubai', price:2600, type:'M', growth:'+11%', desc:'Dubai International Financial Centre — the Middle East\'s top financial hub. Gate Avenue for retail. Luxury residences commanding premium prices. Home to hundreds of global banks and hedge funds.', props:['Luxury Apartments','Penthouses','Offices'], features:['Financial Hub','Gate Avenue','Luxury Dining','Global HQs'], minPrice:2000000, maxPrice:60000000 },
+  { name:'La Mer', emirate:'Dubai', price:2200, type:'M', growth:'+10%', desc:'Meraas beachfront destination in Jumeirah. Vibrant beach and urban lifestyle in one place. Open beach, boutique hotels, international restaurants. Exclusive residences with sea views.', props:['Beachfront Apartments','Hotel Residences'], features:['Public Beach','Bohemian Style','F&B','Water Sports'], minPrice:1500000, maxPrice:25000000 },
+  { name:'Al Barsha', emirate:'Dubai', price:1150, type:'M', growth:'+7%', desc:'Central residential area adjacent to Mall of the Emirates. Diverse mix of villas and apartments. Very convenient location near metro and all major arteries. Popular with middle-income families.', props:['Apartments','Villas'], features:['Mall of Emirates','Metro','Schools','Hospitals'], minPrice:550000, maxPrice:8000000 },
+
+  /* ── ABU DHABI ── */
+  { name:'Saadiyat Island', emirate:'Abu Dhabi', price:2800, type:'F', growth:'+15%', desc:'Abu Dhabi\'s cultural jewel. Louvre Abu Dhabi, Guggenheim (upcoming), Zayed National Museum. Natural beach, Yas Viceroy links. NYU Abu Dhabi. Ultra-premium beachfront living.', props:['Beach Villas','Luxury Apartments','Hotel Residences'], features:['Louvre Abu Dhabi','Natural Beach','Cultural Museums','NYU Abu Dhabi'], minPrice:2000000, maxPrice:200000000 },
+  { name:'Yas Island', emirate:'Abu Dhabi', price:1800, type:'F', growth:'+12%', desc:'Entertainment capital of Abu Dhabi. Ferrari World, Yas Waterworld, Yas Marina Circuit (F1), Warner Bros. Thriving community with massive visitor footfall. Great Airbnb/holiday let potential.', props:['Apartments','Townhouses','Villas'], features:['Ferrari World','F1 Circuit','Yas Mall','Warner Bros World'], minPrice:700000, maxPrice:20000000 },
+  { name:'Al Reem Island', emirate:'Abu Dhabi', price:1550, type:'F', growth:'+10%', desc:'Abu Dhabi\'s most popular freehold investment destination. Dense high-rise development with sea views. Shams Abu Dhabi area, Reem Central Park. Walk-to-everything urban lifestyle.', props:['Sea-View Apartments','Offices'], features:['Reem Central Park','Sea Views','Urban Living','Investment Hub'], minPrice:600000, maxPrice:15000000 },
+  { name:'Al Maryah Island', emirate:'Abu Dhabi', price:2200, type:'F', growth:'+11%', desc:'Abu Dhabi Global Market (financial free zone). Cleveland Clinic, Abu Dhabi Global Market Square. High-end retail at Galleria Mall. Manhattan-style CBD island with premium residences.', props:['Luxury Apartments','Penthouses','Offices'], features:['ADGM Free Zone','Galleria Mall','Cleveland Clinic','Financial Hub'], minPrice:1500000, maxPrice:50000000 },
+  { name:'Khalifa City', emirate:'Abu Dhabi', price:950, type:'F', growth:'+8%', desc:'Large suburban community ideal for families. Freehold villa and apartment options. Near Abu Dhabi Airport, KIZAD. American and British schools. Very popular with expat families seeking space.', props:['Villas','Townhouses','Apartments'], features:['Near Airport','International Schools','Family Community','Spacious'], minPrice:900000, maxPrice:15000000 },
+  { name:'Al Raha Beach', emirate:'Abu Dhabi', price:1450, type:'F', growth:'+9%', desc:'Waterfront mixed-use development between Khalifa City and Yas. Al Raha Creek, beachfront properties. Aldar HQ building nearby. Family-oriented with top amenities and beach clubs.', props:['Waterfront Apartments','Villas','Townhouses'], features:['Beach Access','Al Raha Mall','Creek Views','Marinas'], minPrice:800000, maxPrice:20000000 },
+  { name:'Masdar City', emirate:'Abu Dhabi', price:900, type:'F', growth:'+9%', desc:'World\'s most sustainable city project. IRENA headquarters, renewable energy HQ. Carbon-neutral community powered by solar. Tech and sustainability hub with unique investment appeal.', props:['Eco Apartments','Offices'], features:['IRENA HQ','Zero Carbon','Solar Powered','Tech Hub'], minPrice:500000, maxPrice:5000000 },
+  { name:'MBZ City (Mohammed Bin Zayed)', emirate:'Abu Dhabi', price:850, type:'F', growth:'+7%', desc:'Large master-planned community south of Abu Dhabi. Very popular with Emirati and Arab families. Affordable freehold options, spacious villas. World-class schools and hospitals. Strong rental demand.', props:['Villas','Townhouses'], features:['Affordable Freehold','Spacious Villas','Schools','Hospitals'], minPrice:700000, maxPrice:10000000 },
+  { name:'Al Reef', emirate:'Abu Dhabi', price:720, type:'F', growth:'+6%', desc:'Affordable gated villa and apartment community near Al Shamkha. Mediterranean, Arabian, and Condo-style clusters. Good schools, retail, mosque. Popular with families seeking affordable freehold.', props:['Villas','Apartments'], features:['Gated Community','Mediterranean Style','School','Retail'], minPrice:500000, maxPrice:5000000 },
+  { name:'Corniche Abu Dhabi', emirate:'Abu Dhabi', price:2500, type:'L', growth:'+8%', desc:'Abu Dhabi\'s iconic 8km waterfront promenade. Prestigious addresses, luxury hotels, government buildings. Sea views, public beach. Leasehold for most properties but highest prestige.', props:['Luxury Apartments','Hotels'], features:['Sea Views','8km Promenade','Beach Access','Iconic Address'], minPrice:1200000, maxPrice:40000000 },
+  { name:'Al Bateen', emirate:'Abu Dhabi', price:2000, type:'L', growth:'+7%', desc:'Upscale residential area between Corniche and Khalidiyah. Embassies, government residences, luxury villas. Al Bateen Marina with superyachts. Old money neighbourhood with great prestige.', props:['Luxury Villas','Premium Apartments'], features:['Al Bateen Marina','Embassies','Prestige Address','Sea Views'], minPrice:1500000, maxPrice:60000000 },
+  { name:'Al Khalidiyah', emirate:'Abu Dhabi', price:1500, type:'L', growth:'+7%', desc:'Prime residential neighbourhood in the heart of Abu Dhabi. Mix of old villas being redeveloped into high-rises. Great dining scene, parks, schools. Convenient central location.', props:['Apartments','Villas'], features:['Central Location','Parks','Dining','Schools'], minPrice:700000, maxPrice:10000000 },
+  { name:'Danet Abu Dhabi', emirate:'Abu Dhabi', price:1200, type:'L', growth:'+7%', desc:'Planned residential community with parks and watercourses. Unique network of waterways through the neighbourhood. Family-friendly with good services. Above-average quality community living.', props:['Apartments','Villas'], features:['Waterways','Parks','Family-Friendly','Premium Design'], minPrice:650000, maxPrice:8000000 },
+  { name:'Yas Acres', emirate:'Abu Dhabi', price:1500, type:'F', growth:'+10%', desc:'Exclusive golf and waterfront community on Yas Island by Aldar. Townhouses and villas facing a meandering waterway. Golf course integrated into the community. Premium Yas lifestyle.', props:['Golf Villas','Townhouses'], features:['Golf Course','Waterway','Yas Island','Premium Aldar'], minPrice:1500000, maxPrice:15000000 },
+  { name:'Al Ghadeer', emirate:'Abu Dhabi', price:750, type:'F', growth:'+7%', desc:'Border community between Abu Dhabi and Dubai. Strategically located near Expo City. Mix of affordable townhouses, villas and apartments. Very popular with Expo/DXB workers who live in AUH.', props:['Townhouses','Villas','Apartments'], features:['Near Expo City','Border Location','Affordable','Good ROI'], minPrice:400000, maxPrice:4000000 },
+  { name:'Al Raha Gardens', emirate:'Abu Dhabi', price:1100, type:'F', growth:'+8%', desc:'Green villa community adjacent to Al Raha Beach. Lush landscaping, parks, jogging tracks. Diverse mix of nationalities. Good access to Abu Dhabi and Dubai via Sheikh Zayed Road.', props:['Villas','Townhouses'], features:['Green Parks','Community Pools','Schools','Access to Both Cities'], minPrice:1200000, maxPrice:12000000 },
+  { name:'Saadiyat Cultural District', emirate:'Abu Dhabi', price:3200, type:'F', growth:'+18%', desc:'Home to Louvre Abu Dhabi and site of future Guggenheim Abu Dhabi and Zayed National Museum. Extreme cultural cachet. Limited residential supply. Appreciation potential among highest in UAE.', props:['Ultra-Luxury Villas','Museum Residences'], features:['Louvre Abu Dhabi','Future Guggenheim','Natural Beach','Cultural Capital'], minPrice:5000000, maxPrice:300000000 },
+
+  /* ── SHARJAH ── */
+  { name:'Al Majaz', emirate:'Sharjah', price:600, type:'L', growth:'+6%', desc:'Prime waterfront area along Khalid Lagoon. Al Majaz Waterfront promenade, restaurants, parks. Very lively community with waterfall, amphitheatre. Popular family destination. Limited freehold options.', props:['Apartments','Hotels'], features:['Khalid Lagoon','Waterfront Promenade','Parks','Amphitheatre'], minPrice:300000, maxPrice:4000000 },
+  { name:'Al Qasba', emirate:'Sharjah', price:650, type:'L', growth:'+6%', desc:'Cultural and entertainment canal district. Eye of the Emirates (observation wheel), restaurants, art galleries, gondola rides. Trendy lifestyle area. Growing demand for adjacent residential areas.', props:['Apartments'], features:['Eye of Emirates','Canal','Art Galleries','Gondola'], minPrice:250000, maxPrice:3000000 },
+  { name:'Al Taawun', emirate:'Sharjah', price:520, type:'L', growth:'+5%', desc:'Popular residential area connecting Sharjah to Dubai. High density apartment buildings with large floor plans. Very affordable. Excellent commuter location for Dubai workers wanting larger apartments at lower cost.', props:['Apartments'], features:['Dubai Proximity','Affordable','Large Floor Plans','Commuter Hub'], minPrice:220000, maxPrice:2500000 },
+  { name:'Muwaileh', emirate:'Sharjah', price:650, type:'M', growth:'+7%', desc:'Fast-developing suburb of Sharjah near the University City and Sharjah-Dubai border. Mix of apartments and villas. Growing expat community. Strong rental demand from university staff and students.', props:['Apartments','Villas'], features:['University Proximity','Growing Area','Cafes','Schools'], minPrice:280000, maxPrice:4000000 },
+  { name:'Tilal City', emirate:'Sharjah', price:700, type:'F', growth:'+9%', desc:'Sharjah\'s first freehold mixed-use development. Open to all nationalities. Suburban plots and townhouses. Rapidly developing infrastructure. Strong appreciation potential as major anchor project in Sharjah.', props:['Plots','Townhouses','Villas'], features:['Freehold','All Nationalities','Growing Infrastructure','Great Value'], minPrice:350000, maxPrice:5000000 },
+  { name:'Aljada', emirate:'Sharjah', price:750, type:'F', growth:'+10%', desc:'Sharjah\'s largest urban master development by Arada. Freehold for all. Madar leisure destination, E-sports arena, skate park, live music. Young, vibrant community. Very attractive for investors.', props:['Apartments','Townhouses','Villas'], features:['Madar Destination','E-sports','Skate Park','Vibrant Community'], minPrice:400000, maxPrice:8000000 },
+  { name:'Al Zahia', emirate:'Sharjah', price:700, type:'F', growth:'+8%', desc:'First gated freehold community in Sharjah by Alef Group. European-inspired architecture, water features, lush parks. Very limited supply of townhouses and villas. Excellent quality, strong demand.', props:['Townhouses','Villas'], features:['Gated','Freehold','European Design','Parks'], minPrice:1200000, maxPrice:8000000 },
+  { name:'Sharjah Waterfront City', emirate:'Sharjah', price:800, type:'F', growth:'+11%', desc:'New mega waterfront development on Sharjah\'s coast. 9 islands, 60km of waterways. Future projection of 75,000 residents. Freehold for all. Sea views, beach, marina. Massive appreciation potential.', props:['Waterfront Apartments','Villas','Islands'], features:['9 Islands','60km Waterways','Beach','Marina'], minPrice:500000, maxPrice:15000000 },
+  { name:'Al Nahda (Sharjah)', emirate:'Sharjah', price:540, type:'L', growth:'+5%', desc:'Popular residential district adjacent to Al Nahda (Dubai). Extremely affordable apartments. Massive rental demand from working professionals. Very high occupancy rates and consistent rental income.', props:['Apartments'], features:['Very Affordable','High Occupancy','Dubai Border','Commuter Hub'], minPrice:180000, maxPrice:2000000 },
+  { name:'University City', emirate:'Sharjah', price:600, type:'M', growth:'+6%', desc:'Hub of higher education in UAE. American University of Sharjah, University of Sharjah and more. Strong demand from academic staff and students. Close to Aljada and Tilal City developments.', props:['Apartments','Student Accommodation'], features:['AUS Campus','Multiple Universities','Academic Hub','Growing Area'], minPrice:250000, maxPrice:3000000 },
+  { name:'Khor Fakkan', emirate:'Sharjah', price:400, type:'L', growth:'+5%', desc:'Beautiful bay city on the Gulf of Oman. One of the best natural ports in the region. Growing tourism, crystal blue waters, mountain backdrop. Excellent value. Increasing interest from investors.', props:['Villas','Apartments'], features:['Gulf of Oman','Crystal Waters','Port City','Mountain Views'], minPrice:200000, maxPrice:3000000 },
+  { name:'Kalba', emirate:'Sharjah', price:350, type:'L', growth:'+4%', desc:'The most easterly point of the UAE. Unique mangrove reserve, turtle nesting beach. Pure nature. Al Qurm Nature Reserve nearby. Growing eco-tourism. Very affordable, underrated investment gem.', props:['Villas'], features:['Mangroves','Nature Reserve','Turtles','Eco-Tourism'], minPrice:150000, maxPrice:2000000 },
+
+  /* ── AJMAN ── */
+  { name:'Al Nuaimia', emirate:'Ajman', price:450, type:'F', growth:'+5%', desc:'Central district of Ajman. Mix of commercial and residential. Very affordable freehold apartments. Popular with budget buyers. High rental demand from working population.', props:['Apartments','Shops'], features:['Central Location','Affordable','High Occupancy','Freehold'], minPrice:150000, maxPrice:2000000 },
+  { name:'Ajman Uptown', emirate:'Ajman', price:450, type:'F', growth:'+6%', desc:'Premier freehold project in Ajman. Gated community with villas and townhouses. Good amenities, parks, community center. Affordable alternative to Dubai with higher returns.', props:['Villas','Townhouses','Apartments'], features:['Gated','Freehold','Parks','Community Center'], minPrice:350000, maxPrice:3000000 },
+  { name:'Emirates City (Ajman)', emirate:'Ajman', price:350, type:'F', growth:'+4%', desc:'Large affordable high-rise development. Some of UAE\'s cheapest freehold properties. Very high yields — 9-12% reported. Popular with small investors. Ongoing development of towers.', props:['Apartments'], features:['Cheapest Freehold UAE','High Yield','Investment Grade','Access to SHJ/DXB'], minPrice:100000, maxPrice:1500000 },
+  { name:'Al Rashidiya (Ajman)', emirate:'Ajman', price:400, type:'M', growth:'+5%', desc:'Established residential area with good amenities. Ajman University nearby. Mix of apartments and villas. Affordable and well-connected. Popular with families and young professionals.', props:['Apartments','Villas'], features:['University Nearby','Established Area','Affordable','Good Amenities'], minPrice:200000, maxPrice:3000000 },
+  { name:'Corniche Ajman', emirate:'Ajman', price:600, type:'M', growth:'+6%', desc:'Ajman\'s attractive seaside promenade. Beautiful long beach, sea views. More affordable than Dubai beachfront. Some freehold options. Popular with families who want beach access at reasonable price.', props:['Sea-View Apartments'], features:['Long Beach','Sea Views','Promenade','Affordable Beachfront'], minPrice:250000, maxPrice:3500000 },
+  { name:'Al Jurf', emirate:'Ajman', price:500, type:'F', growth:'+6%', desc:'Industrial and residential area on Ajman-Sharjah border. Al Jurf Medical City brings healthcare demand. Growing residential demand. Good value freehold properties close to major road links.', props:['Apartments','Villas','Commercial'], features:['Medical City','Industrial Zone','Good Value','Road Links'], minPrice:250000, maxPrice:2500000 },
+  { name:'Al Rawda', emirate:'Ajman', price:440, type:'M', growth:'+5%', desc:'Quiet residential neighbourhood with mostly villas. Large plot sizes, mature trees. Suburban feel. Popular with large families. Affordable compared to nearby Sharjah.', props:['Villas','Apartments'], features:['Large Plots','Quiet Area','Family-Friendly','Affordable'], minPrice:800000, maxPrice:5000000 },
+  { name:'Al Hamidiya', emirate:'Ajman', price:420, type:'M', growth:'+4%', desc:'Northern Ajman residential area. Mostly local and Arab population. Established neighbourhood with mosques, schools, markets. Very affordable housing options for larger families.', props:['Villas','Apartments'], features:['Local Community','Schools','Markets','Very Affordable'], minPrice:200000, maxPrice:2000000 },
+
+  /* ── RAK ── */
+  { name:'Al Marjan Island', emirate:'RAK', price:1200, type:'F', growth:'+25%', desc:'The hottest investment destination in UAE 2024-2025. Wynn Al Marjan Island (UAE\'s first casino resort) opening 2027. Man-made coral island. Explosive price growth. Early investors seeing 40%+ gains.', props:['Waterfront Apartments','Sea Villas','Hotel Residences'], features:['Wynn Casino Resort 2027','Sea Views','Investment Hotspot','Limited Supply'], minPrice:600000, maxPrice:30000000 },
+  { name:'Mina Al Arab', emirate:'RAK', price:1000, type:'F', growth:'+18%', desc:'Award-winning eco-friendly waterfront community. Natural beach, mangroves, flamingo lagoon. Anantara Resort. Sustainable living with stunning nature. Very family-friendly. RAK\'s leading established community.', props:['Waterfront Villas','Apartments','Hotel Rooms'], features:['Natural Beach','Flamingo Lagoon','Anantara Hotel','Eco-Friendly'], minPrice:700000, maxPrice:15000000 },
+  { name:'Al Hamra Village', emirate:'RAK', price:900, type:'F', growth:'+15%', desc:'Established golf community with marina. Al Hamra Golf Club, Al Hamra Marina, Al Hamra Mall. Sea and golf views. The original freehold community of RAK. Strong resale market.', props:['Golf Villas','Sea Apartments','Marina Homes'], features:['Golf Course','Marina','Al Hamra Mall','Beach Club'], minPrice:500000, maxPrice:12000000 },
+  { name:'Hayat Island', emirate:'RAK', price:1500, type:'F', growth:'+20%', desc:'New premium island development next to Al Marjan. Part of the Wynn Resort island complex. Branded residences, beach club. Extremely high demand driven by casino-adjacent location. Strong capital gain expected.', props:['Branded Residences','Beach Villas'], features:['Near Wynn Resort','Beach Club','Island Living','High Growth'], minPrice:1000000, maxPrice:20000000 },
+  { name:'Saraya Islands', emirate:'RAK', price:1300, type:'F', growth:'+18%', desc:'Premium island cluster near Al Marjan. Luxury villas and apartments with direct sea access. Exclusive gated communities. Benefiting enormously from Wynn effect and RAK\'s tourism ambitions.', props:['Sea Villas','Waterfront Apartments'], features:['Island Living','Sea Access','Gated','Premium Quality'], minPrice:900000, maxPrice:25000000 },
+  { name:'RAK City Center', emirate:'RAK', price:550, type:'L', growth:'+8%', desc:'The urban heart of Ras Al Khaimah. Government offices, Manar Mall, seafront. Affordable apartments and villas. Growing demand as RAK invests heavily in tourism infrastructure.', props:['Apartments','Villas'], features:['Manar Mall','Seafront','Government Hub','Affordable'], minPrice:300000, maxPrice:4000000 },
+  { name:'Al Jazirah Al Hamra', emirate:'RAK', price:700, type:'M', growth:'+10%', desc:'Historic pearl fishing village being transformed into eco-heritage tourism destination. Preserved wind-tower architecture. Unique. Near Al Hamra. Growing tourism and real estate attention.', props:['Heritage Villas','Eco Residences'], features:['Pearl Fishing History','Wind Tower Heritage','Eco-Tourism','Nature'], minPrice:400000, maxPrice:5000000 },
+  { name:'Al Qurm', emirate:'RAK', price:650, type:'M', growth:'+8%', desc:'Northern RAK residential suburb with mountain views. Quiet, spacious, established community. Good schools, local markets. Very family-oriented. Popular with Emiratis and long-term expat residents.', props:['Villas','Apartments'], features:['Mountain Views','Family Area','Schools','Quiet'], minPrice:400000, maxPrice:5000000 },
+  { name:'Al Nakheel RAK', emirate:'RAK', price:620, type:'M', growth:'+7%', desc:'Residential area close to RAK City Centre. Mostly villa properties with gardens. Low-rise, suburban feel. Affordable with good quality of life. Parks and schools within walking distance.', props:['Villas'], features:['Suburban Feel','Gardens','Parks','Low-Rise'], minPrice:350000, maxPrice:4000000 },
+
+  /* ── UAQ ── */
+  { name:'UAQ Marina', emirate:'UAQ', price:500, type:'F', growth:'+7%', desc:'Umm Al Quwain\'s premier waterfront marina development. Al Salam City, White Bay. Quiet emirate with clean beaches. Ultra-affordable freehold. Growing interest as Dubai prices push buyers to cheaper alternatives.', props:['Marina Apartments','Waterfront Villas'], features:['Marina','Clean Beach','Quiet','Very Affordable'], minPrice:200000, maxPrice:3000000 },
+  { name:'UAQ Downtown', emirate:'UAQ', price:380, type:'L', growth:'+5%', desc:'The compact city center of UAE\'s smallest emirate. Affordable housing with a quiet, relaxed pace. Old fort, fish market, mangroves. Excellent value for buyers wanting UAE residency at minimal cost.', props:['Apartments','Villas'], features:['Affordable UAE Residency','Mangroves','Fish Market','Quiet Life'], minPrice:150000, maxPrice:2000000 },
+  { name:'Al Salamah', emirate:'UAQ', price:380, type:'M', growth:'+5%', desc:'Residential suburb of UAQ with villa plots and apartment buildings. Very quiet and peaceful. Good for families wanting affordable living with UAE residency. Low traffic, community feel.', props:['Villas','Apartments'], features:['Very Quiet','Peaceful','Affordable','Family Community'], minPrice:150000, maxPrice:2000000 },
+  { name:'Al Raudah UAQ', emirate:'UAQ', price:360, type:'M', growth:'+4%', desc:'Affordable residential area in UAQ. Local market, schools, mosques. Very low cost of living. Ideal for those seeking UAE property with minimal budget. Rising interest from value investors.', props:['Apartments','Villas'], features:['Lowest Cost in UAE','Local Market','Value Investment','UAE Residency'], minPrice:120000, maxPrice:1500000 },
+
+  /* ── FUJAIRAH ── */
+  { name:'Fujairah City', emirate:'Fujairah', price:500, type:'L', growth:'+6%', desc:'Capital of the east coast emirate. Fujairah Fort, Fujairah Museum, mountains backdrop. Gulf of Oman views. Growing as a business hub due to oil storage terminals. Distinct lifestyle from west coast.', props:['Apartments','Villas'], features:['Mountain Backdrop','Gulf of Oman','Historic Fort','Business Hub'], minPrice:250000, maxPrice:4000000 },
+  { name:'Fujairah Corniche', emirate:'Fujairah', price:550, type:'L', growth:'+6%', desc:'Beautiful seafront promenade on the Gulf of Oman. Crystal clear blue waters, mountains behind. Developing tourism. Sea view apartments at fraction of Dubai prices. Outdoor enthusiast paradise.', props:['Sea-View Apartments'], features:['Gulf of Oman','Mountain Views','Clear Water','Snorkelling'], minPrice:280000, maxPrice:4000000 },
+  { name:'Al Aqah Beach', emirate:'Fujairah', price:600, type:'L', growth:'+7%', desc:'One of the most beautiful beaches in UAE on the Gulf of Oman. Le Meridien, Sandy Beach Hotel. Snorkelling at Snoopy Island. Growing luxury resort development. Unspoiled nature with investment potential.', props:['Beach Villas','Hotel Residences'], features:['Snoopy Island','Snorkelling','Pristine Beach','Luxury Resorts'], minPrice:350000, maxPrice:8000000 },
+  { name:'Dibba', emirate:'Fujairah', price:450, type:'L', growth:'+5%', desc:'Northernmost city of Fujairah, split between UAE, Oman and Sharjah. Stunning bay, mountains, adventure tourism growing. Kite surfing, mountain biking, camping. Untouched beauty. Very affordable.', props:['Villas'], features:['Stunning Bay','Mountains','Adventure Tourism','Affordable'], minPrice:200000, maxPrice:3000000 },
+  { name:'Madhab', emirate:'Fujairah', price:380, type:'L', growth:'+4%', desc:'Inland mountain area of Fujairah. Springs, hot springs, Wadi tourism. Unique landscape. Eco-tourism potential. Very affordable land and villa options for those wanting mountain retreat lifestyle.', props:['Mountain Villas','Eco Retreats'], features:['Hot Springs','Mountains','Wadis','Nature Retreats'], minPrice:150000, maxPrice:2000000 }
+];
+const AREA_DETAILS_MAP = new Map();
+AREA_DETAILS.forEach(a=>AREA_DETAILS_MAP.set(`${a.emirate}||${a.name}`.toLowerCase(), a));
+const AREA_ALIASES = {
+  'Dubai||Jumeirah Beach Residence (JBR)': 'JBR (Jumeirah Beach Residence)',
+  'Dubai||Jumeirah Village Circle (JVC)': 'Jumeirah Village Circle',
+  'Dubai||Jumeirah Village Triangle (JVT)': 'Jumeirah Village Triangle',
+  'Dubai||Dubai Creek Harbour': 'Creek Harbour',
+  'Dubai||Dubai South': 'Dubai South (Expo City)',
+  'Dubai||Silicon Oasis': 'Dubai Silicon Oasis',
+  'Dubai||Mohammed Bin Rashid City': 'MBR City',
+  'Dubai||Arabian Ranches 1': 'Arabian Ranches',
+  'Dubai||Nad Al Sheba 1': 'Nad Al Sheba',
+  'Dubai||Nad Al Sheba 2': 'Nad Al Sheba',
+  'Dubai||Nad Al Sheba 3': 'Nad Al Sheba',
+  'Dubai||Nad Al Sheba 4': 'Nad Al Sheba',
+  'Dubai||Dubai Investment Park 1': 'Dubai Investment Park (DIP)',
+  'Dubai||Dubai Investment Park 2': 'Dubai Investment Park (DIP)',
+  'Ajman||Ajman Corniche': 'Corniche Ajman',
+  'Ajman||Al Nuaimia 1': 'Al Nuaimia',
+  'Ajman||Al Nuaimia 2': 'Al Nuaimia',
+  'Ajman||Al Nuaimia 3': 'Al Nuaimia',
+  'Ajman||Al Rashidiya 1': 'Al Rashidiya (Ajman)',
+  'Ajman||Al Rashidiya 2': 'Al Rashidiya (Ajman)',
+  'Ajman||Al Rashidiya 3': 'Al Rashidiya (Ajman)',
+  'Ajman||Al Rawdah 1': 'Al Rawda',
+  'Ajman||Al Rawdah 2': 'Al Rawda',
+  'Ajman||Al Rawdah 3': 'Al Rawda',
+  'Ajman||Al Hamidiya 1': 'Al Hamidiya',
+  'Ajman||Al Hamidiya 2': 'Al Hamidiya',
+  'Ajman||Emirates City': 'Emirates City (Ajman)',
+  'Sharjah||Al Majaz 1': 'Al Majaz',
+  'Sharjah||Al Majaz 2': 'Al Majaz',
+  'Sharjah||Al Majaz 3': 'Al Majaz',
+  'Sharjah||Muelih': 'Muwaileh',
+  'Sharjah||Muwaileh Commercial': 'Muwaileh',
+  'Sharjah||Al Nahda Sharjah': 'Al Nahda (Sharjah)',
+  'RAK||Ras Al Khaimah City Center': 'RAK City Center',
+  'RAK||Al Jazeera Al Hamra': 'Al Jazirah Al Hamra',
+  'UAQ||Al Raudah': 'Al Raudah UAQ',
+  'Fujairah||Fujairah City Center': 'Fujairah City',
+  'Fujairah||Al Aqah': 'Al Aqah Beach',
+  'Fujairah||Al Madhab': 'Madhab',
+  'Abu Dhabi||Mohammed Bin Zayed City': 'MBZ City (Mohammed Bin Zayed)',
+  'Abu Dhabi||Al Corniche': 'Corniche Abu Dhabi'
+};
+function getAreaDetails(name, emirate){
+  const direct = AREA_DETAILS_MAP.get(`${emirate}||${name}`.toLowerCase());
+  if (direct) return direct;
+  const alias = AREA_ALIASES[`${emirate}||${name}`];
+  if (alias) return AREA_DETAILS_MAP.get(`${emirate}||${alias}`.toLowerCase()) || null;
+  const normalized = String(name).toLowerCase();
+  for (const item of AREA_DETAILS) {
+    if (item.emirate===emirate && (normalized.includes(item.name.toLowerCase()) || item.name.toLowerCase().includes(normalized))) return item;
+  }
+  return null;
+}
+function flattenAreas(){
+  const rows=[];
+  Object.keys(COMMUNITY_DATA).forEach(em=>COMMUNITY_DATA[em].forEach(n=>{
+    const det=getAreaDetails(n, em) || {};
+    rows.push({ name:n, emirate:em, desc:det.desc||'Boundary lookup available on click.', price:det.price??null, type:det.type||'', growth:det.growth||'', props:Array.isArray(det.props)?det.props:[], features:Array.isArray(det.features)?det.features:[], minPrice:det.minPrice??null, maxPrice:det.maxPrice??null });
+  }));
+  return rows;
+}
+
+function normalizeRichName(name){
+  return String(name||'').toLowerCase()
+    .replace(/\(.*?\)/g,' ')
+    .replace(/jumeirah beach residence/g,'jbr')
+    .replace(/jumeirah village circle/g,'jvc')
+    .replace(/jumeirah village triangle/g,'jvt')
+    .replace(/jumeirah lakes towers/g,'jlt')
+    .replace(/mohammed bin rashid city/g,'mbr city')
+    .replace(/dubai investment park/g,'dip')
+    .replace(/ras al khaimah/g,'rak')
+    .replace(/corniche ajman/g,'ajman corniche')
+    .replace(/[^a-z0-9]+/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+function buildMergedAreas(){
+  const baseRows=flattenAreas();
+  const richRows=Array.isArray(window.RICH_AREAS)?window.RICH_AREAS:[];
+  const richMap=new Map();
+  richRows.forEach(item=>{
+    const key=`${item.emirate}||${normalizeRichName(item.name)}`;
+    richMap.set(key,item);
+  });
+  return baseRows.map(row=>{
+    const candidates=[
+      `${row.emirate}||${normalizeRichName(row.name)}`,
+      `${row.emirate}||${normalizeRichName(AREA_ALIASES[`${row.emirate}||${row.name}`]||'')}`
+    ];
+    let rich=null;
+    for(const key of candidates){ if(key.endsWith('||')) continue; if(richMap.has(key)){ rich=richMap.get(key); break; } }
+    if(!rich){
+      for(const item of richRows){
+        if(item.emirate!==row.emirate) continue;
+        const a=normalizeRichName(item.name), b=normalizeRichName(row.name);
+        if(a===b || a.includes(b) || b.includes(a)){ rich=item; break; }
+      }
+    }
+    return {
+      ...row,
+      desc: rich?.desc || row.desc,
+      props: Array.isArray(rich?.props) && rich.props.length ? rich.props : row.props,
+      features: Array.isArray(rich?.features) && rich.features.length ? rich.features : row.features,
+      lat: rich?.lat ?? row.lat ?? null,
+      lng: rich?.lng ?? row.lng ?? null,
+      pop: rich?.pop || null,
+      noteSource: rich ? 'merged' : 'base'
+    };
+  });
+}
+const AREAS=buildMergedAreas();
+const ECOL={'Dubai':'#eb8450','Abu Dhabi':'#64b2ff','Sharjah':'#a784f7','Ajman':'#59d8a3','UAQ':'#f0c85e','RAK':'#ff7997','Fujairah':'#66d7ef'};
+const EMIRATE_LABELS={'UAQ':'Umm Al Quwain','RAK':'Ras Al Khaimah'};
+const COMBINED_PACK_URL = './uae_local_boundary_pack.geojson';
+const ABU_LOCAL_PACK_URL = COMBINED_PACK_URL;
+const EMIRATES_URL = './UAE_Emirates_Boundaries.geojson';
+
+const STYLE_CONFIG_URL = './uae_digital_map_style.json';
+const INTERACTIVE_POINTS_URL = './uae_interactive_points.geojson';
+// const PROXY_URL = './proxy.php';
+async function searchNominatimDirect(q) {
+  const query = (q || '').trim();
+  if (!query) {
+    throw new Error('Missing search query');
+  }
+
+  const params = new URLSearchParams({
+    q: query,
+    format: 'jsonv2',
+    addressdetails: '1',
+    polygon_geojson: '1',
+    limit: '8',
+    countrycodes: 'ae'
+  });
+
+  const url = `https://nominatim.openstreetmap.org/search?${params.toString()}`;
+
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json'
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error(`Nominatim request failed with status ${response.status}`);
+  }
+
+  return await response.json();
+}
+let styleConfig = null;
+let interactivePoints = null;
+
+function applyStyleConfig(cfg){
+  if(!cfg) return;
+  styleConfig = cfg;
+  const root = document.documentElement;
+  if(cfg.backgroundTop) root.style.setProperty('--bg', cfg.backgroundTop);
+  if(cfg.backgroundBottom) root.style.setProperty('--bg2', cfg.backgroundBottom);
+  if(cfg.goldAccent) root.style.setProperty('--gold', cfg.goldAccent);
+  if(cfg.labelColor) root.style.setProperty('--text', cfg.labelColor);
+  if(cfg.panelGlow) root.style.setProperty('--panel-glow', cfg.panelGlow);
+}
+
+async function fetchBoundaryLookup(name) {
+  return await searchNominatimDirect(name);
+}
+function isPolygonGeoJSON(geom){
+  return !!geom && (geom.type === 'Polygon' || geom.type === 'MultiPolygon');
+}
+function candidateQueries(area){
+  const qs = [
+    `${area.name}, ${area.emirate}, UAE`,
+    `${area.name} ${area.emirate}`,
+    area.name
+  ];
+  return [...new Set(qs.filter(Boolean))];
+}
+function scoreGeoCandidate(item, area){
+  let score = 0;
+  const text = `${item.display_name||''} ${item.name||''}`.toLowerCase();
+  const name = String(area.name||'').toLowerCase();
+  const em = String(area.emirate||'').toLowerCase();
+  if(text.includes(name)) score += 40;
+  if(text.includes(em)) score += 20;
+  if(item.type === 'suburb' || item.type === 'neighbourhood' || item.addresstype === 'suburb' || item.addresstype === 'neighbourhood') score += 15;
+  if(item.class === 'boundary' || item.type === 'administrative') score -= 10;
+  score += Number(item.importance || 0);
+  return score;
+}
+async function proxyPolygon(area){
+  try{
+    const queries = candidateQueries(area);
+    for(const q of queries){
+      const results = await fetchBoundaryLookup(q);
+      if(!Array.isArray(results) || !results.length) continue;
+      const candidates = results.filter(r => isPolygonGeoJSON(r.geojson));
+      if(!candidates.length) continue;
+      candidates.sort((a,b)=>scoreGeoCandidate(b, area)-scoreGeoCandidate(a, area));
+      const best = candidates[0];
+      if(best && best.geojson) return best.geojson;
+    }
+  }catch(err){
+    console.warn('Direct boundary lookup failed:', area?.name, err);
+  }
+  return null;
+}
+
+function drawInteractivePoints(){
+  if(!isStyleReady || !interactivePoints || !Array.isArray(interactivePoints.features)) return;
+  if(map.getLayer('interactive-points-label')) map.removeLayer('interactive-points-label');
+  if(map.getLayer('interactive-points-circle')) map.removeLayer('interactive-points-circle');
+  if(map.getLayer('interactive-points-glow')) map.removeLayer('interactive-points-glow');
+  if(map.getSource('interactive-points')) map.removeSource('interactive-points');
+
+  const filtered = {
+    type:'FeatureCollection',
+    features: interactivePoints.features.filter(f=>{
+      const em = (f.properties?.emirate || '').trim();
+      return selectedEmirate==='all' ? true : em === selectedEmirate;
+    })
+  };
+
+  map.addSource('interactive-points',{type:'geojson',data:filtered});
+
+  const beforeId = (map.getStyle().layers||[]).find(l => l.type==='symbol' && l.layout && l.layout['text-field'])?.id;
+
+  map.addLayer({
+    id:'interactive-points-glow',
+    type:'circle',
+    source:'interactive-points',
+    paint:{
+      'circle-radius':['interpolate',['linear'],['zoom'],6,4,10,7,14,10],
+      'circle-color':['coalesce',['get','glowColor'], styleConfig?.cyanAccent || '#8AF1FF'],
+      'circle-opacity':['interpolate',['linear'],['zoom'],6,0.18,10,0.22,14,0.26],
+      'circle-blur':0.8
+    }
+  }, beforeId);
+
+  map.addLayer({
+    id:'interactive-points-circle',
+    type:'circle',
+    source:'interactive-points',
+    paint:{
+      'circle-radius':['interpolate',['linear'],['zoom'],6,1.8,10,3.0,14,4.2],
+      'circle-color':['coalesce',['get','pinColor'], styleConfig?.goldAccent || '#F2CF77'],
+      'circle-stroke-color':'#ffffff',
+      'circle-stroke-width':0.6,
+      'circle-opacity':0.96
+    }
+  }, beforeId);
+
+  map.addLayer({
+    id:'interactive-points-label',
+    type:'symbol',
+    source:'interactive-points',
+    layout:{
+      'text-field':['get','name'],
+      'text-font':['Open Sans Semibold','Arial Unicode MS Regular'],
+      'text-size':['interpolate',['linear'],['zoom'],6,10,10,12,14,14],
+      'text-offset':[0,1.2],
+      'text-anchor':'top',
+      'text-allow-overlap':false
+    },
+    paint:{
+      'text-color':['coalesce',['get','labelColor'], styleConfig?.labelColor || '#F2F8FF'],
+      'text-halo-color':'#031019',
+      'text-halo-width':1.35,
+      'text-opacity':['interpolate',['linear'],['zoom'],6,0.65,10,0.9,14,1]
+    }
+  });
+}
+
+const areaListEl = document.getElementById('areaList');
+const searchInput = document.getElementById('searchInput');
+const countValue = document.getElementById('countValue');
+const pillsEl = document.getElementById('pills');
+const panel = document.getElementById('detailPanel');
+const panelContent = document.getElementById('panelContent');
+const mapFocus = null;
+const sidebar = document.getElementById('sidebar');
+const sidebarToggle = document.getElementById('sidebarToggle');
+let selectedEmirate = 'all';
+let selectedArea = null;
+let localPack = null;
+let emiratesGeo = null;
+let selectedMarker = null;
+let boundaryLoaded = false;
+let isStyleReady = false;
+function emirateLabel(v){ return EMIRATE_LABELS[v] || v; }
+function colorFor(em){ return ECOL[em] || '#d8b46b'; }
+function slug(s){ return String(s||'').toLowerCase().replace(/\([^)]*\)/g,'').replace(/[^a-z0-9]+/g,' ').trim(); }
+function animateCounter(el, target, prefix='', suffix=''){ if(!el) return; const num=Number(target); if(!Number.isFinite(num)){el.textContent=prefix + '—' + suffix; return;} const start=performance.now(); const dur=900; const from=0; function tick(now){ const p=Math.min(1,(now-start)/dur); const eased=1-Math.pow(1-p,3); const val=from + (num-from)*eased; el.textContent = prefix + (Math.round(val)).toLocaleString('en-US') + suffix; if(p<1) requestAnimationFrame(tick); } requestAnimationFrame(tick); }
+function clearSelectionLayers(){ if(!isStyleReady) return; ['selected-pedestal','selected-fill','selected-fill-soft','selected-fill-tint','selected-line','selected-glow','selected-glow-inner','selected-halo-floor'].forEach(id=>{ try{ if(map.getLayer(id)) map.removeLayer(id); }catch(e){} }); try{ if(map.getSource('selected-boundary')) map.removeSource('selected-boundary'); }catch(e){} if(selectedMarker){ selectedMarker.remove(); selectedMarker=null; } }
+function ensure3DBuildings(){ if(!isStyleReady) return; if(map.getLayer('kairo-3d-buildings')) return; const layers = map.getStyle().layers || []; const buildingLayer = layers.find(l => l['source-layer']==='building'); const labelLayer = layers.find(l => l.type==='symbol' && l.layout && l.layout['text-field']); if(!buildingLayer) return; try{ map.addLayer({ id:'kairo-3d-buildings', type:'fill-extrusion', source:buildingLayer.source, 'source-layer':'building', minzoom:13, filter:['all',['==',['geometry-type'],'Polygon']], paint:{ 'fill-extrusion-color':['interpolate',['linear'],['coalesce',['to-number',['get','render_height']],['to-number',['get','height']],0],0,'#d8c69d',10,'#b6c88f',18,'#7f8ea1',60,'#546478',120,'#6a7e94',250,'#93a6bc'], 'fill-extrusion-height':['coalesce',['to-number',['get','render_height']],['to-number',['get','height']],8], 'fill-extrusion-base':['coalesce',['to-number',['get','render_min_height']],['to-number',['get','min_height']],0], 'fill-extrusion-opacity':0.98 } }, labelLayer ? labelLayer.id : undefined); }catch(e){ console.warn('3D building layer skipped', e); } }
+
+function ensureEnhancedContextLayers(){
+  if(!isStyleReady) return;
+  const layers = map.getStyle().layers || [];
+  const buildingLayer = layers.find(l => l['source-layer']==='building');
+  const labelLayer = layers.find(l => l.type==='symbol' && l.layout && l.layout['text-field']);
+  const poiSymbolLayers = layers.filter(l => l.type==='symbol' && ((((l['source-layer']||'').toLowerCase().includes('poi')) || ((l.id||'').toLowerCase().includes('poi')))));
+  const parkFillCandidate = layers.find(l => l.type==='fill' && ['park','landcover','landuse'].includes(l['source-layer']));
+  const parkLineCandidate = layers.find(l => l.type==='line' && ['park','landcover','landuse'].includes(l['source-layer']));
+  if(buildingLayer && !map.getLayer('kairo-villas')){
+    try{
+      map.addLayer({
+        id:'kairo-villas',
+        type:'fill-extrusion',
+        source:buildingLayer.source,
+        'source-layer':'building',
+        minzoom:12.5,
+        filter:['all',['==',['geometry-type'],'Polygon'],['<=',['coalesce',['to-number',['get','render_height']],['to-number',['get','height']],8],18]],
+        paint:{
+          'fill-extrusion-color':'#d8cfa6',
+          'fill-extrusion-height':['coalesce',['to-number',['get','render_height']],['to-number',['get','height']],6],
+          'fill-extrusion-base':['coalesce',['to-number',['get','render_min_height']],['to-number',['get','min_height']],0],
+          'fill-extrusion-opacity':0.48
+        }
+      }, 'kairo-3d-buildings');
+    }catch(e){}
+  }
+  if(parkFillCandidate && !map.getLayer('kairo-parks-fill')){
+    try{
+      map.addLayer({
+        id:'kairo-parks-fill',
+        type:'fill',
+        source:parkFillCandidate.source,
+        'source-layer':parkFillCandidate['source-layer'],
+        filter:['any',
+          ['==',['get','class'],'park'],
+          ['==',['get','subclass'],'park'],
+          ['==',['get','class'],'garden'],
+          ['==',['get','class'],'grass'],
+          ['==',['get','class'],'recreation_ground'],
+          ['==',['get','class'],'pitch']
+        ],
+        paint:{
+          'fill-color':'#36d98a',
+          'fill-opacity':['interpolate',['linear'],['zoom'],9,0.05,12,0.10,15,0.16]
+        }
+      }, labelLayer ? labelLayer.id : undefined);
+    }catch(e){}
+  }
+  if((parkLineCandidate || parkFillCandidate) && !map.getLayer('kairo-parks-line')){
+    try{
+      map.addLayer({
+        id:'kairo-parks-line',
+        type:'line',
+        source:(parkLineCandidate||parkFillCandidate).source,
+        'source-layer':(parkLineCandidate||parkFillCandidate)['source-layer'],
+        filter:['any',
+          ['==',['get','class'],'park'],
+          ['==',['get','subclass'],'park'],
+          ['==',['get','class'],'garden'],
+          ['==',['get','class'],'grass'],
+          ['==',['get','class'],'recreation_ground'],
+          ['==',['get','class'],'pitch']
+        ],
+        paint:{
+          'line-color':'#8cffbf',
+          'line-width':['interpolate',['linear'],['zoom'],10,0.7,14,1.6,16,2.2],
+          'line-opacity':['interpolate',['linear'],['zoom'],10,0.34,14,0.50,16,0.62],
+          'line-blur':0.3
+        }
+      }, labelLayer ? labelLayer.id : undefined);
+    }catch(e){}
+  }
+  poiSymbolLayers.forEach(l=>{
+    try{ map.setPaintProperty(l.id,'text-halo-color','#031019'); }catch(e){}
+    try{ map.setPaintProperty(l.id,'text-halo-width',1.6); }catch(e){}
+    try{ map.setPaintProperty(l.id,'text-color','#ffffff'); }catch(e){}
+    try{ map.setLayoutProperty(l.id,'icon-size',['interpolate',['linear'],['zoom'],10,1.0,14,1.22,17,1.35]); }catch(e){}
+    try{ map.setLayoutProperty(l.id,'text-size',['interpolate',['linear'],['zoom'],10,11,14,13.5,17,15]); }catch(e){}
+  });
+}
+const map = new maptilersdk.Map({ container:'map', style: maptilersdk.MapStyle.STREETS.DARK, center:[54.45,24.47], zoom:8.55, pitch:50, bearing:-10, antialias:true, terrain:false, maxPitch:70 });
+try{ map.setLanguage(maptilersdk.Language.ENGLISH); }catch(e){}
+
+function enforceEnglishLabels(){
+  const layers=(map.getStyle()&&map.getStyle().layers)||[];
+  layers.forEach(l=>{
+    if(l.type==='symbol' && l.layout && l.layout['text-field']){
+      try{
+        map.setLayoutProperty(l.id,'text-field',['coalesce',['get','name:en'],['get','name_en'],['get','name']]);
+      }catch(e){}
+    }
+  });
+}
+map.addControl(new maptilersdk.NavigationControl({showCompass:false, visualizePitch:true}), 'bottom-right');
+map.on('style.load', ()=>{ isStyleReady=true; try{ map.setFog({range:[0.5,10], color:'#06111e','high-color':'#0c1a2b','space-color':'#02060d','horizon-blend':0.08}); }catch(e){} try{ map.setLanguage(maptilersdk.Language.ENGLISH); }catch(e){} try{ enforceEnglishLabels(); }catch(e){} ensure3DBuildings(); ensureEnhancedContextLayers(); if(boundaryLoaded && selectedArea) selectArea(selectedArea, false); if(emiratesGeo) drawEmirates(); });
+
+// Safe sprite fallback for missing style images
+function registerFallbackImage(id){
+  if(!id || !String(id).trim() || map.hasImage(id)) return;
+  const rgba = new Uint8Array([0,0,0,0]); // 1x1 transparent pixel
+  try { map.addImage(id, {width:1, height:1, data:rgba}); } catch(e) {}
+}
+map.on('styleimagemissing',(e)=>{
+  const id=(e && e.id)||'';
+  registerFallbackImage(id);
+});
+map.on('load', async ()=>{
+  try{
+    const [packRes, emiratesRes, styleRes, pointsRes] = await Promise.all([
+      fetch(ABU_LOCAL_PACK_URL),
+      fetch(EMIRATES_URL),
+      fetch(STYLE_CONFIG_URL).catch(()=>null),
+      fetch(INTERACTIVE_POINTS_URL).catch(()=>null)
+    ]);
+    if(!packRes.ok) throw new Error(`Boundary pack not found: ${packRes.status}`);
+    if(!emiratesRes.ok) throw new Error(`Emirates boundary file not found: ${emiratesRes.status}`);
+    localPack = await packRes.json();
+    emiratesGeo = await emiratesRes.json();
+    if(styleRes && styleRes.ok) applyStyleConfig(await styleRes.json());
+    if(pointsRes && pointsRes.ok) interactivePoints = await pointsRes.json();
+    boundaryLoaded = true;
+    drawEmirates();
+    drawInteractivePoints();
+    renderList();
+  }catch(err){
+    console.error(err);
+    areaListEl.innerHTML='<div class="empty">Required local map files were not loaded. Check that index.html, uae_local_boundary_pack.geojson, UAE_Emirates_Boundaries.geojson, uae_digital_map_style.json, and uae_interactive_points.geojson are in the same folder.</div>';
+  }
+});
+function drawEmirates(){
+  if(!isStyleReady || !emiratesGeo) return;
+  if(map.getSource('emirates')){ map.getSource('emirates').setData(emiratesGeo); return; }
+  map.addSource('emirates',{type:'geojson',data:emiratesGeo});
+  map.addLayer({
+    id:'emirates-line',
+    type:'line',
+    source:'emirates',
+    paint:{
+      'line-color':['match',['get','shapeName'],'Dubai','#eb8450','Abu Dhabi','#64b2ff','Sharjah','#a784f7','Ajman','#59d8a3','Umm Al Quwain','#f0c85e','Ras Al Khaimah','#ff7997','Fujairah','#66d7ef', styleConfig?.lineColor || '#9FE8FF'],
+      'line-width':['case',['==',['get','shapeName'],selectedEmirate],2.3,1.2],
+      'line-opacity':0.42
+    }
+  });
+}
+function flattenAreasSimple(){ const rows=[]; Object.keys(COMMUNITY_DATA).forEach(em=>COMMUNITY_DATA[em].forEach(n=>{ const det=getAreaDetails(n, em)||{}; rows.push({ name:n, emirate:em, desc:det.desc||'Location intelligence view.', price:det.price??null, growth:det.growth||'', type:det.type||'', props:Array.isArray(det.props)?det.props:[], features:Array.isArray(det.features)?det.features:[], minPrice:det.minPrice??null, maxPrice:det.maxPrice??null }); })); return rows; }
+const AREAS2 = flattenAreasSimple();
+function renderList(){ if(isStyleReady && interactivePoints) drawInteractivePoints(); const q=slug(searchInput.value); const filtered=AREAS2.filter(a=>(selectedEmirate==='all'||a.emirate===selectedEmirate)&&(!q||slug(a.name+' '+a.emirate+' '+(a.desc||'')).includes(q))); countValue.textContent=filtered.length; if(!filtered.length){ areaListEl.innerHTML='<div class="empty">No matching areas found.</div>'; return; } const order=['Dubai','Abu Dhabi','Sharjah','Ajman','RAK','UAQ','Fujairah']; const grouped={}; filtered.forEach(a=>(grouped[a.emirate]??=[]).push(a)); areaListEl.innerHTML = order.filter(em=>grouped[em]).map(em=>`<section><div class="group-head"><span class="dot" style="background:${colorFor(em)}"></span>${emirateLabel(em)}<span class="group-count">${grouped[em].length}</span></div>${grouped[em].map(a=>`<div class="area-row ${selectedArea&&selectedArea.name===a.name?'active':''}" data-name="${a.name}" data-em="${a.emirate}"><div><div class="area-name">${a.name}</div><div class="area-sub">${emirateLabel(a.emirate)}</div></div><div style="color:#7f91ad">›</div></div>`).join('')}</section>`).join(''); areaListEl.querySelectorAll('.area-row').forEach(row=>row.addEventListener('click',()=>{ const area=AREAS2.find(a=>a.name===row.dataset.name && a.emirate===row.dataset.em); if(area) selectArea(area); })); }
+function normalizeAreaName(s){
+  return String(s||'').toLowerCase()
+    .replace(/\(.*?\)/g,' ')
+    .replace(/jumeirah beach residence/g,'jbr')
+    .replace(/jumeirah lakes towers/g,'jlt')
+    .replace(/jumeirah village circle/g,'jvc')
+    .replace(/jumeirah village triangle/g,'jvt')
+    .replace(/mohammed bin rashid city/g,'mbr city')
+    .replace(/[^a-z0-9]+/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+function getOfficialNames(props){
+  const out = [];
+  if(Array.isArray(props?.official_names)) out.push(...props.official_names);
+  if(Array.isArray(props?.grouped_variants)) out.push(...props.grouped_variants);
+  return out.filter(Boolean);
+}
+function findLocalFeature(area){
+  if(!localPack || !Array.isArray(localPack.features)) return null;
+  const targetName = normalizeAreaName(area.name);
+  const targetEm = String(area.emirate||'').toLowerCase();
+  return localPack.features.find(f=>{
+    const p = f.properties || {};
+    if(String(p.emirate||'').toLowerCase() !== targetEm) return false;
+    const names = [p.community_name_en, ...getOfficialNames(p)].map(normalizeAreaName);
+    return names.some(n => n===targetName || n.includes(targetName) || targetName.includes(n));
+  }) || null;
+}
+function markerHTML(area){ return `<div class="community-marker"><div class="m-title">${area.name}</div><div class="m-sub">${emirateLabel(area.emirate)}</div></div>`; }
+function buildFeatureCollection(geom, props={}){ return {type:'FeatureCollection',features:[{type:'Feature',properties:props,geometry:geom}]}; }
+function bboxCenter(geom){ const coords=[]; const walk=a=>Array.isArray(a)&&typeof a[0]==='number'?coords.push(a):Array.isArray(a)&&a.forEach(walk); walk(geom.coordinates); let minX=1e9,maxX=-1e9,minY=1e9,maxY=-1e9; coords.forEach(([x,y])=>{if(x<minX)minX=x;if(x>maxX)maxX=x;if(y<minY)minY=y;if(y>maxY)maxY=y;}); return [(minX+maxX)/2,(minY+maxY)/2]; }
+function fitToGeom(geom){ const coords=[]; const walk=a=>Array.isArray(a)&&typeof a[0]==='number'?coords.push(a):Array.isArray(a)&&a.forEach(walk); walk(geom.coordinates); let minX=1e9,maxX=-1e9,minY=1e9,maxY=-1e9; coords.forEach(([x,y])=>{if(x<minX)minX=x;if(x>maxX)maxX=x;if(y<minY)minY=y;if(y>maxY)maxY=y;}); setSidebar(false); const center=[(minX+maxX)/2,(minY+maxY)/2]; const span=Math.max(maxX-minX,maxY-minY); let targetZoom=14.45; if(span<0.018) targetZoom=14.95; else if(span<0.035) targetZoom=14.75; else if(span<0.07) targetZoom=14.95; else if(span<0.12) targetZoom=13.65; else if(span<0.22) targetZoom=13.65; const rightPad = window.innerWidth < 980 ? 245 : 238; map.easeTo({center:center, zoom:targetZoom, pitch:62, bearing:-16, padding:{top:62,right:rightPad,bottom:18,left:14}, duration:1200, essential:true}); return center; }
+function showFocus(area){ return; }
+function openPanel(area){ const c=colorFor(area.emirate); panelContent.innerHTML=`<div class="dp-hero"><div class="dp-flag"><span style="width:10px;height:10px;border-radius:50%;background:${c};display:inline-block;box-shadow:0 0 14px ${c}66"></span>${emirateLabel(area.emirate)}</div><div class="dp-name">${area.name}</div></div><div class="dp-sec"><div class="stats"><div class="stat"><div class="k">Avg. AED / ft²</div><div class="v" id="stat-price">—</div><div class="s">market view</div></div><div class="stat"><div class="k">Entry From</div><div class="v" id="stat-min">—</div><div class="s">ticket size</div></div><div class="stat"><div class="k">Upper Range</div><div class="v" id="stat-max">—</div><div class="s">high end</div></div><div class="stat"><div class="k">Growth Signal</div><div class="v" id="stat-growth">—</div><div class="s">recent view</div></div></div></div><div class="dp-sec"><div class="dp-lbl">About This Community</div><div class="dp-text">${area.desc||'Location intelligence panel.'}</div></div><div class="dp-sec"><div class="dp-lbl">Property Types</div><div class="tags">${(area.props||[]).length?(area.props||[]).map(p=>`<span class='tag'>${p}</span>`).join(''):'<span class="tag">Residential</span>'}</div></div><div class="dp-sec"><div class="dp-lbl">Key Highlights</div><div class="highlights">${(area.features||[]).length?(area.features||[]).map(x=>`<div class='highlight'><span class='hl-dot'></span><span>${x}</span></div>`).join(''):'<div class="highlight"><span class="hl-dot"></span><span>Premium location</span></div>'}</div></div>`; panel.classList.add('open'); animateCounter(document.getElementById('stat-price'), area.price || 0, 'AED '); animateCounter(document.getElementById('stat-min'), area.minPrice || 0, 'AED '); animateCounter(document.getElementById('stat-max'), area.maxPrice || 0, 'AED '); const gNum=parseInt(String(area.growth||'').replace(/[^0-9-]/g,''),10); const growthEl=document.getElementById('stat-growth'); if(Number.isFinite(gNum)){ const start=performance.now(); const dur=800; const from=0; function tick(now){ const p=Math.min(1,(now-start)/dur); const eased=1-Math.pow(1-p,3); growthEl.textContent=(Math.round(from+(gNum-from)*eased))+'%'; if(p<1) requestAnimationFrame(tick); } requestAnimationFrame(tick); } else growthEl.textContent=area.growth||'—'; }
+async function fetchBoundaryLookup(name) {
+  return await searchNominatimDirect(name);
+}
+async function selectArea(area, fly=true){ selectedArea=area; selectedEmirate=area.emirate; if(isStyleReady && interactivePoints) drawInteractivePoints(); pillsEl.querySelectorAll('.pill').forEach(p=>p.classList.toggle('on', p.dataset.e===area.emirate)); renderList(); clearSelectionLayers(); showFocus(area); openPanel(area); const localFeature=findLocalFeature(area); let geom=null; if(localFeature) geom=localFeature.geometry; else geom=await proxyPolygon(area); if(geom && isStyleReady){ const fc=buildFeatureCollection(geom,{name:area.name, emirate:area.emirate}); if(map.getSource('selected-boundary')){ try{ map.getSource('selected-boundary').setData(fc); }catch(e){ try{ map.removeSource('selected-boundary'); }catch(_){} map.addSource('selected-boundary',{type:'geojson',data:fc}); } } else { map.addSource('selected-boundary',{type:'geojson',data:fc}); } const below3D = map.getLayer('kairo-3d-buildings') ? 'kairo-3d-buildings' : undefined; const labelLayer = (map.getStyle().layers||[]).find(l => l.type==='symbol' && l.layout && l.layout['text-field']); const above3D = labelLayer ? labelLayer.id : undefined;
+      // low frosted pedestal UNDER buildings
+      map.addLayer({id:'selected-pedestal',type:'fill-extrusion',source:'selected-boundary',paint:{
+        'fill-extrusion-color':'#eff6ff',
+        'fill-extrusion-base':0,
+        'fill-extrusion-height':12,
+        'fill-extrusion-opacity':0.06
+      }}, below3D);
+      map.addLayer({id:'selected-fill',type:'fill',source:'selected-boundary',paint:{'fill-color':'#ffffff','fill-opacity':0.006}}, below3D);
+      map.addLayer({id:'selected-fill-soft',type:'fill',source:'selected-boundary',paint:{'fill-color':'#f7fbff','fill-opacity':0.004}}, below3D);
+      map.addLayer({id:'selected-fill-tint',type:'fill',source:'selected-boundary',paint:{'fill-color':'#d9ebff','fill-opacity':0.003}}, below3D);
+      map.addLayer({id:'selected-halo-floor',type:'line',source:'selected-boundary',paint:{'line-color':'#f3f8ff','line-width':24,'line-opacity':0.12,'line-blur':20}}, below3D);
+      map.addLayer({id:'selected-glow',type:'line',source:'selected-boundary',paint:{'line-color':'#f8fbff','line-width':12.0,'line-opacity':0.18,'line-blur':12.0}}, below3D);
+      map.addLayer({id:'selected-glow-inner',type:'line',source:'selected-boundary',paint:{'line-color':'#edf6ff','line-width':6.0,'line-opacity':0.16,'line-blur':4.0}}, below3D);
+      map.addLayer({id:'selected-line',type:'line',source:'selected-boundary',paint:{'line-color':'#ffffff','line-width':2.4,'line-opacity':1}}, above3D);
+      const center=fitToGeom(geom); const el=document.createElement('div'); el.innerHTML=markerHTML(area); selectedMarker=new maptilersdk.Marker({element:el.firstChild, anchor:'bottom'}).setLngLat(center).addTo(map); } else { const ctr=[54.45,24.47]; map.flyTo({center:ctr, zoom:11.8, pitch:48, bearing:-10, duration:1000}); } }
+searchInput.addEventListener('input', renderList);
+pillsEl.querySelectorAll('.pill').forEach(btn=>btn.addEventListener('click',()=>{ selectedEmirate=btn.dataset.e; selectedArea=null; pillsEl.querySelectorAll('.pill').forEach(p=>p.classList.toggle('on',p===btn)); setSidebar(true); renderList(); clearSelectionLayers(); panel.classList.remove('open'); if(selectedEmirate==='all'&&emiratesGeo){ map.fitBounds([[51.9,22.6],[56.5,26.5]],{padding:40,duration:1100}); } else if(emiratesGeo && selectedEmirate!=='all'){ const f=emiratesGeo.features.find(x=> (x.properties.shapeName||x.properties.NAME||x.properties.name)===selectedEmirate); if(f){ const geom=f.geometry; const coords=[]; const walk=a=>Array.isArray(a)&&typeof a[0]==='number'?coords.push(a):Array.isArray(a)&&a.forEach(walk); walk(geom.coordinates); let minX=1e9,maxX=-1e9,minY=1e9,maxY=-1e9; coords.forEach(([x,y])=>{if(x<minX)minX=x;if(x>maxX)maxX=x;if(y<minY)minY=y;if(y>maxY)maxY=y;}); map.fitBounds([[minX,minY],[maxX,maxY]],{padding:{top:90,right:50,bottom:60,left:280},duration:1000,pitch:36,bearing:-4,maxZoom:9.8}); } } }));
+document.getElementById('closePanel').addEventListener('click',()=>panel.classList.remove('open'));
+sidebar.classList.add('collapsed');
+let sidebarOpenTimer=null, sidebarCloseTimer=null;
+function setSidebar(open){
+  clearTimeout(sidebarOpenTimer); clearTimeout(sidebarCloseTimer);
+  sidebar.classList.toggle('collapsed', !open);
+  sidebarToggle.textContent = open ? '‹' : '›';
+}
+sidebarToggle.addEventListener('mouseenter',()=>{
+  clearTimeout(sidebarCloseTimer);
+  clearTimeout(sidebarOpenTimer);
+  setSidebar(true);
+});
+sidebar.addEventListener('mouseenter',()=>{
+  clearTimeout(sidebarCloseTimer);
+  clearTimeout(sidebarOpenTimer);
+  setSidebar(true);
+});
+sidebar.addEventListener('mouseleave',()=>{
+  clearTimeout(sidebarOpenTimer);
+  clearTimeout(sidebarCloseTimer);
+  sidebarCloseTimer=setTimeout(()=>setSidebar(false), 180);
+});
+window.addEventListener('resize',()=>{});
+</script>
+</body>
+</html>
