@@ -119,7 +119,7 @@ header{height:70px!important;padding:0 16px!important;border-bottom-color:rgba(2
 </div>
 </div>
 <script>
-// GitHub-only static build: no PHP/XAMPP dependency required.
+// GitHub presentation build: prefers exact local/admin boundaries and disables live fallback by default.
 maptilersdk.config.apiKey = 'hJdbBzqEvo5ediAUVCy0';
 try{ maptilersdk.config.language = maptilersdk.Language.ENGLISH; }catch(e){}
 const COMMUNITY_DATA={"Dubai": ["Downtown Dubai", "Business Bay", "Dubai Marina", "Jumeirah Beach Residence (JBR)", "Palm Jumeirah", "Jumeirah 1", "Jumeirah 2", "Jumeirah 3", "Jumeirah Village Circle (JVC)", "Jumeirah Village Triangle (JVT)", "Jumeirah Lakes Towers (JLT)", "Jumeirah Golf Estates", "Jumeirah Park", "Jumeirah Islands", "Arabian Ranches 1", "Arabian Ranches 2", "Arabian Ranches 3", "Dubai Hills Estate", "Emirates Hills", "Emirates Living", "The Springs", "The Meadows", "The Lakes", "The Greens", "The Views", "Al Barsha 1", "Al Barsha 2", "Al Barsha 3", "Al Barsha South", "Al Quoz 1", "Al Quoz 2", "Al Quoz 3", "Al Quoz 4", "Al Wasl", "Al Safa 1", "Al Safa 2", "Al Manara", "Al Sufouh 1", "Al Sufouh 2", "Al Mizhar 1", "Al Mizhar 2", "Al Khawaneej 1", "Al Khawaneej 2", "Al Warqa 1", "Al Warqa 2", "Al Warqa 3", "Al Warqa 4", "Al Warqa 5", "Al Nahda 1", "Al Nahda 2", "Al Qusais 1", "Al Qusais 2", "Al Qusais 3", "Al Twar 1", "Al Twar 2", "Al Twar 3", "Al Rashidiya", "Al Muraqqabat", "Al Rigga", "Al Mamzar", "Al Karama", "Al Mankhool", "Al Jafiliya", "Al Satwa", "Al Kifaf", "Al Hamriya", "Al Garhoud", "Al Jaddaf", "Oud Metha", "Oud Al Muteena", "Bur Dubai", "Deira", "Naif", "Port Saeed", "Corniche Deira", "Muhaisnah 1", "Muhaisnah 2", "Muhaisnah 3", "Muhaisnah 4", "Mirdif", "Nad Al Hamar", "Nad Al Sheba 1", "Nad Al Sheba 2", "Nad Al Sheba 3", "Nad Al Sheba 4", "Ras Al Khor Industrial", "Za'abeel 1", "Za'abeel 2", "DIFC", "City Walk", "La Mer", "Bluewaters Island", "Dubai Creek Harbour", "Dubai Harbour", "Dubai South", "Dubai Investment Park 1", "Dubai Investment Park 2", "Discovery Gardens", "Ibn Battuta Gate", "Motor City", "Sports City", "Studio City", "Production City", "Silicon Oasis", "Academic City", "International City", "Dragon City", "Liwan", "Dubailand", "Mudon", "Reem Community", "Tilal Al Ghaf", "Damac Hills 1", "Damac Hills 2", "Akoya Oxygen", "Town Square", "Serena", "Villanova", "Nshama Town Square", "Sobha Hartland", "Mohammed Bin Rashid City", "Meydan", "Ras Al Khor", "Festival City", "Jebel Ali Village", "Jebel Ali Industrial", "Palm Jebel Ali", "The World Islands", "Deira Islands", "BurJuman Area", "Wadi Al Safa 2", "Wadi Al Safa 3", "Wadi Al Safa 4", "Wadi Al Safa 5", "Wadi Al Safa 6", "Wadi Al Safa 7", "Layan Community", "Al Furjan", "The Valley", "Emaar Beachfront", "Dubai Design District", "The Sustainable City", "Remraam", "Arjan"], "Abu Dhabi": ["Al Reem Island", "Al Maryah Island", "Yas Island", "Saadiyat Island", "Al Raha Beach", "Al Raha Gardens", "Khalifa City A", "Khalifa City B", "Mohammed Bin Zayed City", "Masdar City", "Al Reef", "Al Ghadeer", "Al Shamkha", "Shakhbout City", "Zayed City", "Al Mushrif", "Al Karamah", "Al Manhal", "Al Nahyan", "Al Rowdah", "Al Zahiyah", "Al Khalidiyah", "Al Bateen", "Al Markaziyah", "Al Corniche", "Al Hosn", "Al Mina", "Madinat Zayed", "Al Muroor", "Al Wahdah", "Al Manaseer", "Al Falah", "Baniyas East", "Baniyas West", "Al Samha", "Al Wathba", "Al Shahama", "Al Rahba", "Al Bahia", "Al Jubail Island", "Hudayriyat Island", "Sas Al Nakhl", "Al Zaab", "Officers City", "Delma Island", "Al Ain Al Jimi", "Al Ain Al Muwaiji", "Al Ain Zakher", "Al Ain Al Towayya"], "Sharjah": ["Al Majaz 1", "Al Majaz 2", "Al Majaz 3", "Al Nahda Sharjah", "Al Khan", "Al Qasimia", "Al Taawun", "Al Mamzar Sharjah", "Al Yarmook", "Al Rahmaniya 1", "Al Rahmaniya 2", "Al Rahmaniya 3", "Al Rahmaniya 4", "Al Rahmaniya 5", "Al Rahmaniya 6", "Al Rahmaniya 7", "Al Rahmaniya 8", "Al Zahia", "Muwaileh Commercial", "University City", "Al Jurf", "Al Falaj", "Al Ghafia", "Al Butina", "Al Rigaibah", "Al Gulayaa", "Al Ramla", "Halwan", "Samnan", "Industrial Area 1", "Industrial Area 2", "Industrial Area 3", "Industrial Area 4", "Industrial Area 5", "Industrial Area 6", "Industrial Area 7", "Industrial Area 8", "Industrial Area 9", "Industrial Area 10", "Industrial Area 11", "Industrial Area 12", "Industrial Area 13", "Industrial Area 14", "Industrial Area 15", "Industrial Area 16", "Industrial Area 17", "Industrial Area 18", "Abu Shagara", "Al Gharb", "Al Mirgab", "Rolla Area", "Al Layyah", "Al Qadisiya", "Al Nud", "Al Wahda", "Sharjah Waterfront City", "Aljada", "Tilal City", "Nasma Residences", "Hoshi", "Suyoh", "Al Nouf 1", "Al Nouf 2", "Al Nouf 3", "Muelih", "Wasit", "Al Qulayaa", "Khor Fakkan", "Kalba", "Dibba Al Hisn"], "Ajman": ["Al Nuaimia 1", "Al Nuaimia 2", "Al Nuaimia 3", "Al Rashidiya 1", "Al Rashidiya 2", "Al Rashidiya 3", "Al Rumaila 1", "Al Rumaila 2", "Al Rumaila 3", "Al Rawdah 1", "Al Rawdah 2", "Al Rawdah 3", "Al Jurf 1", "Al Jurf 2", "Al Jurf 3", "Al Mowaihat 1", "Al Mowaihat 2", "Al Mowaihat 3", "Emirates City", "Al Ameera Village", "Ajman Uptown", "Al Hamidiya 1", "Al Hamidiya 2", "Al Sawan", "Al Karama Ajman", "Al Naemiyah", "Ajman Corniche", "Al Bustan", "Garden City", "Al Khor", "Masfout", "Manama"], "UAQ": ["UAQ Marina", "Al Raas", "Al Salam City", "Al Hamra UAQ", "Al Khor UAQ", "Falaj Al Mualla", "Al Raudah", "Al Maidan", "Old Town UAQ", "Industrial Area UAQ", "Al Salamah", "Al Dour", "Siniya Island"], "RAK": ["Al Hamra Village", "Mina Al Arab", "Al Marjan Island", "Bayah", "Al Nakheel", "Al Mamourah", "Al Qusaidat", "Al Jazeera Al Hamra", "Al Dhait North", "Al Dhait South", "Al Seer", "Sidroh", "Ras Al Khaimah City Center", "Dafan Al Nakheel", "Khuzam", "Ghayl", "Al Rams", "Sha'am", "Julfar", "Digdaga", "Al Azra", "Al Uraibi", "Wadi Shah", "Al Muntasir", "Al Qawasim Corniche", "Al Mairid", "Al Naseem", "Al Hamraniyah", "Khatt", "Al Kharran", "Wadi Al Qawr"], "Fujairah": ["Fujairah City Center", "Sakamkam", "Al Faseel", "Al Tawyeen", "Al Gurfa", "Al Hilal City", "Merashid", "Al Sharyah", "Qidfa", "Murbah", "Khor Fakkan Shared", "Dibba Al Fujairah", "Al Aqah", "Masafi", "Al Bithnah", "Mirbah", "Al Hayl", "Rugaylat", "Al Madhab", "Wadi Al Hayl", "Al Nakheel Fujairah", "Fujairah Free Zone Area"]}
@@ -354,8 +354,166 @@ function buildMergedAreas(){
 const AREAS=buildMergedAreas();
 const ECOL={'Dubai':'#eb8450','Abu Dhabi':'#64b2ff','Sharjah':'#a784f7','Ajman':'#59d8a3','UAQ':'#f0c85e','RAK':'#ff7997','Fujairah':'#66d7ef'};
 const EMIRATE_LABELS={'UAQ':'Umm Al Quwain','RAK':'Ras Al Khaimah'};
-const ABU_LOCAL_PACK_URL = './uae_local_boundary_pack_abu_v7_dubai_v17.geojson';
+const COMBINED_PACK_URL = './uae_local_boundary_pack.geojson';
+const ABU_LOCAL_PACK_URL = COMBINED_PACK_URL;
 const EMIRATES_URL = './UAE_Emirates_Boundaries.geojson';
+
+const STYLE_CONFIG_URL = './uae_digital_map_style.json';
+const INTERACTIVE_POINTS_URL = './uae_interactive_points.geojson';
+const ENABLE_LIVE_LOOKUP = false; // GitHub presentation mode: use local/admin boundaries only by default.
+// const PROXY_URL = './proxy.php';
+async function searchNominatimDirect(q) {
+  const query = (q || '').trim();
+  if (!query) {
+    throw new Error('Missing search query');
+  }
+
+  const params = new URLSearchParams({
+    q: query,
+    format: 'jsonv2',
+    addressdetails: '1',
+    polygon_geojson: '1',
+    limit: '8',
+    countrycodes: 'ae'
+  });
+
+  const url = `https://nominatim.openstreetmap.org/search?${params.toString()}`;
+
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json'
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error(`Nominatim request failed with status ${response.status}`);
+  }
+
+  return await response.json();
+}
+let styleConfig = null;
+let interactivePoints = null;
+
+function applyStyleConfig(cfg){
+  if(!cfg) return;
+  styleConfig = cfg;
+  const root = document.documentElement;
+  if(cfg.backgroundTop) root.style.setProperty('--bg', cfg.backgroundTop);
+  if(cfg.backgroundBottom) root.style.setProperty('--bg2', cfg.backgroundBottom);
+  if(cfg.goldAccent) root.style.setProperty('--gold', cfg.goldAccent);
+  if(cfg.labelColor) root.style.setProperty('--text', cfg.labelColor);
+  if(cfg.panelGlow) root.style.setProperty('--panel-glow', cfg.panelGlow);
+}
+
+async function fetchBoundaryLookup(name) {
+  return await searchNominatimDirect(name);
+}
+function isPolygonGeoJSON(geom){
+  return !!geom && (geom.type === 'Polygon' || geom.type === 'MultiPolygon');
+}
+function candidateQueries(area){
+  const qs = [
+    `${area.name}, ${area.emirate}, UAE`,
+    `${area.name} ${area.emirate}`,
+    area.name
+  ];
+  return [...new Set(qs.filter(Boolean))];
+}
+function scoreGeoCandidate(item, area){
+  let score = 0;
+  const text = `${item.display_name||''} ${item.name||''}`.toLowerCase();
+  const name = String(area.name||'').toLowerCase();
+  const em = String(area.emirate||'').toLowerCase();
+  if(text.includes(name)) score += 40;
+  if(text.includes(em)) score += 20;
+  if(item.type === 'suburb' || item.type === 'neighbourhood' || item.addresstype === 'suburb' || item.addresstype === 'neighbourhood') score += 15;
+  if(item.class === 'boundary' || item.type === 'administrative') score -= 10;
+  score += Number(item.importance || 0);
+  return score;
+}
+async function proxyPolygon(area){
+  try{
+    const queries = candidateQueries(area);
+    for(const q of queries){
+      const results = await fetchBoundaryLookup(q);
+      if(!Array.isArray(results) || !results.length) continue;
+      const candidates = results.filter(r => isPolygonGeoJSON(r.geojson));
+      if(!candidates.length) continue;
+      candidates.sort((a,b)=>scoreGeoCandidate(b, area)-scoreGeoCandidate(a, area));
+      const best = candidates[0];
+      if(best && best.geojson) return best.geojson;
+    }
+  }catch(err){
+    console.warn('Direct boundary lookup failed:', area?.name, err);
+  }
+  return null;
+}
+
+function drawInteractivePoints(){
+  if(!isStyleReady || !interactivePoints || !Array.isArray(interactivePoints.features)) return;
+  if(map.getLayer('interactive-points-label')) map.removeLayer('interactive-points-label');
+  if(map.getLayer('interactive-points-circle')) map.removeLayer('interactive-points-circle');
+  if(map.getLayer('interactive-points-glow')) map.removeLayer('interactive-points-glow');
+  if(map.getSource('interactive-points')) map.removeSource('interactive-points');
+
+  const filtered = {
+    type:'FeatureCollection',
+    features: interactivePoints.features.filter(f=>{
+      const em = (f.properties?.emirate || '').trim();
+      return selectedEmirate==='all' ? true : em === selectedEmirate;
+    })
+  };
+
+  map.addSource('interactive-points',{type:'geojson',data:filtered});
+
+  const beforeId = (map.getStyle().layers||[]).find(l => l.type==='symbol' && l.layout && l.layout['text-field'])?.id;
+
+  map.addLayer({
+    id:'interactive-points-glow',
+    type:'circle',
+    source:'interactive-points',
+    paint:{
+      'circle-radius':['interpolate',['linear'],['zoom'],6,4,10,7,14,10],
+      'circle-color':['coalesce',['get','glowColor'], styleConfig?.cyanAccent || '#8AF1FF'],
+      'circle-opacity':['interpolate',['linear'],['zoom'],6,0.18,10,0.22,14,0.26],
+      'circle-blur':0.8
+    }
+  }, beforeId);
+
+  map.addLayer({
+    id:'interactive-points-circle',
+    type:'circle',
+    source:'interactive-points',
+    paint:{
+      'circle-radius':['interpolate',['linear'],['zoom'],6,1.8,10,3.0,14,4.2],
+      'circle-color':['coalesce',['get','pinColor'], styleConfig?.goldAccent || '#F2CF77'],
+      'circle-stroke-color':'#ffffff',
+      'circle-stroke-width':0.6,
+      'circle-opacity':0.96
+    }
+  }, beforeId);
+
+  map.addLayer({
+    id:'interactive-points-label',
+    type:'symbol',
+    source:'interactive-points',
+    layout:{
+      'text-field':['get','name'],
+      'text-font':['Open Sans Semibold','Arial Unicode MS Regular'],
+      'text-size':['interpolate',['linear'],['zoom'],6,10,10,12,14,14],
+      'text-offset':[0,1.2],
+      'text-anchor':'top',
+      'text-allow-overlap':false
+    },
+    paint:{
+      'text-color':['coalesce',['get','labelColor'], styleConfig?.labelColor || '#F2F8FF'],
+      'text-halo-color':'#031019',
+      'text-halo-width':1.35,
+      'text-opacity':['interpolate',['linear'],['zoom'],6,0.65,10,0.9,14,1]
+    }
+  });
+}
 
 const areaListEl = document.getElementById('areaList');
 const searchInput = document.getElementById('searchInput');
@@ -378,7 +536,7 @@ function colorFor(em){ return ECOL[em] || '#d8b46b'; }
 function slug(s){ return String(s||'').toLowerCase().replace(/\([^)]*\)/g,'').replace(/[^a-z0-9]+/g,' ').trim(); }
 function animateCounter(el, target, prefix='', suffix=''){ if(!el) return; const num=Number(target); if(!Number.isFinite(num)){el.textContent=prefix + '—' + suffix; return;} const start=performance.now(); const dur=900; const from=0; function tick(now){ const p=Math.min(1,(now-start)/dur); const eased=1-Math.pow(1-p,3); const val=from + (num-from)*eased; el.textContent = prefix + (Math.round(val)).toLocaleString('en-US') + suffix; if(p<1) requestAnimationFrame(tick); } requestAnimationFrame(tick); }
 function clearSelectionLayers(){ if(!isStyleReady) return; ['selected-pedestal','selected-fill','selected-fill-soft','selected-fill-tint','selected-line','selected-glow','selected-glow-inner','selected-halo-floor'].forEach(id=>{ try{ if(map.getLayer(id)) map.removeLayer(id); }catch(e){} }); try{ if(map.getSource('selected-boundary')) map.removeSource('selected-boundary'); }catch(e){} if(selectedMarker){ selectedMarker.remove(); selectedMarker=null; } }
-function ensure3DBuildings(){ if(!isStyleReady) return; if(map.getLayer('kairo-3d-buildings')) return; const layers = map.getStyle().layers || []; const buildingLayer = layers.find(l => l['source-layer']==='building'); const labelLayer = layers.find(l => l.type==='symbol' && l.layout && l.layout['text-field']); if(!buildingLayer) return; try{ map.addLayer({ id:'kairo-3d-buildings', type:'fill-extrusion', source:buildingLayer.source, 'source-layer':'building', minzoom:13, filter:['all',['==',['geometry-type'],'Polygon']], paint:{ 'fill-extrusion-color':['interpolate',['linear'],['coalesce',['to-number',['get','render_height']],['to-number',['get','height']],0],0,'#d8c69d',10,'#b6c88f',18,'#7f8ea1',60,'#546478',120,'#6a7e94',250,'#93a6bc'], 'fill-extrusion-height':['coalesce',['to-number',['get','render_height']],['to-number',['get','height']],8], 'fill-extrusion-base':['coalesce',['to-number',['get','render_min_height']],['to-number',['get','min_height']],0], 'fill-extrusion-opacity':0.97 } }, labelLayer ? labelLayer.id : undefined); }catch(e){ console.warn('3D building layer skipped', e); } }
+function ensure3DBuildings(){ if(!isStyleReady) return; if(map.getLayer('kairo-3d-buildings')) return; const layers = map.getStyle().layers || []; const buildingLayer = layers.find(l => l['source-layer']==='building'); const labelLayer = layers.find(l => l.type==='symbol' && l.layout && l.layout['text-field']); if(!buildingLayer) return; try{ map.addLayer({ id:'kairo-3d-buildings', type:'fill-extrusion', source:buildingLayer.source, 'source-layer':'building', minzoom:13, filter:['all',['==',['geometry-type'],'Polygon']], paint:{ 'fill-extrusion-color':['interpolate',['linear'],['coalesce',['to-number',['get','render_height']],['to-number',['get','height']],0],0,'#d8c69d',10,'#b6c88f',18,'#7f8ea1',60,'#546478',120,'#6a7e94',250,'#93a6bc'], 'fill-extrusion-height':['coalesce',['to-number',['get','render_height']],['to-number',['get','height']],8], 'fill-extrusion-base':['coalesce',['to-number',['get','render_min_height']],['to-number',['get','min_height']],0], 'fill-extrusion-opacity':0.98 } }, labelLayer ? labelLayer.id : undefined); }catch(e){ console.warn('3D building layer skipped', e); } }
 
 function ensureEnhancedContextLayers(){
   if(!isStyleReady) return;
@@ -460,22 +618,7 @@ function ensureEnhancedContextLayers(){
     try{ map.setLayoutProperty(l.id,'text-size',['interpolate',['linear'],['zoom'],10,11,14,13.5,17,15]); }catch(e){}
   });
 }
-
-function suppressProblematicSymbolStyling(){
-  const layers=(map.getStyle()&&map.getStyle().layers)||[];
-  layers.forEach(l=>{
-    if(l.type!=='symbol') return;
-    try{
-      const iconImg = map.getLayoutProperty(l.id,'icon-image');
-      if(iconImg==='' || iconImg===' '){ map.setLayoutProperty(l.id,'icon-image', null); }
-    }catch(e){}
-    try{ map.setLayoutProperty(l.id,'text-font',['Open Sans Regular','Arial Unicode MS Regular']); }catch(e){}
-    try{ map.setLayoutProperty(l.id,'icon-optional', true); }catch(e){}
-    try{ map.setLayoutProperty(l.id,'text-optional', true); }catch(e){}
-  });
-}
-
-const map = new maptilersdk.Map({ container:'map', style: maptilersdk.MapStyle.STREETS.DARK, center:[54.45,24.47], zoom:8.55, pitch:52, bearing:-10, antialias:true, terrain:false, maxPitch:70 });
+const map = new maptilersdk.Map({ container:'map', style: maptilersdk.MapStyle.STREETS.DARK, center:[54.45,24.47], zoom:8.55, pitch:50, bearing:-10, antialias:true, terrain:false, maxPitch:70 });
 try{ map.setLanguage(maptilersdk.Language.ENGLISH); }catch(e){}
 
 function enforceEnglishLabels(){
@@ -483,13 +626,13 @@ function enforceEnglishLabels(){
   layers.forEach(l=>{
     if(l.type==='symbol' && l.layout && l.layout['text-field']){
       try{
-        map.setLayoutProperty(l.id,'text-field',['coalesce',['get','name:en'],['get','name_en'],'']);
+        map.setLayoutProperty(l.id,'text-field',['coalesce',['get','name:en'],['get','name_en'],['get','name']]);
       }catch(e){}
     }
   });
 }
 map.addControl(new maptilersdk.NavigationControl({showCompass:false, visualizePitch:true}), 'bottom-right');
-map.on('style.load', ()=>{ isStyleReady=true; try{ map.setFog({range:[0.5,10], color:'#06111e','high-color':'#0c1a2b','space-color':'#02060d','horizon-blend':0.08}); }catch(e){} try{ map.setLanguage(maptilersdk.Language.ENGLISH); }catch(e){} try{ enforceEnglishLabels(); }catch(e){} ensure3DBuildings(); ensureEnhancedContextLayers(); suppressProblematicSymbolStyling(); if(boundaryLoaded && selectedArea) selectArea(selectedArea, false); if(emiratesGeo) drawEmirates(); });
+map.on('style.load', ()=>{ isStyleReady=true; try{ map.setFog({range:[0.5,10], color:'#06111e','high-color':'#0c1a2b','space-color':'#02060d','horizon-blend':0.08}); }catch(e){} try{ map.setLanguage(maptilersdk.Language.ENGLISH); }catch(e){} try{ enforceEnglishLabels(); }catch(e){} ensure3DBuildings(); ensureEnhancedContextLayers(); if(boundaryLoaded && selectedArea) selectArea(selectedArea, false); if(emiratesGeo) drawEmirates(); });
 
 // Safe sprite fallback for missing style images
 function registerFallbackImage(id){
@@ -498,24 +641,89 @@ function registerFallbackImage(id){
   try { map.addImage(id, {width:1, height:1, data:rgba}); } catch(e) {}
 }
 map.on('styleimagemissing',(e)=>{
-  const id=((e && e.id)||'').trim();
-  if(!id) return;
+  const id=(e && e.id)||'';
   registerFallbackImage(id);
 });
-map.on('load', async ()=>{ try{ [localPack, emiratesGeo] = await Promise.all([fetch(ABU_LOCAL_PACK_URL).then(r=>r.json()), fetch(EMIRATES_URL).then(r=>r.json())]); boundaryLoaded = true; drawEmirates(); renderList(); }catch(err){ console.error(err); areaListEl.innerHTML='<div class="empty">Required local map files were not loaded.</div>'; } });
-function drawEmirates(){ if(!isStyleReady || !emiratesGeo) return; if(map.getSource('emirates')){ map.getSource('emirates').setData(emiratesGeo); return; } map.addSource('emirates',{type:'geojson',data:emiratesGeo}); map.addLayer({id:'emirates-line',type:'line',source:'emirates',paint:{'line-color':['match',['get','shapeName'],'Dubai','#eb8450','Abu Dhabi','#64b2ff','Sharjah','#a784f7','Ajman','#59d8a3','Umm Al Quwain','#f0c85e','Ras Al Khaimah','#ff7997','Fujairah','#66d7ef','#d8b46b'],'line-width':['case',['==',['get','shapeName'],selectedEmirate],2.1,1.1],'line-opacity':0.38}}); }
+map.on('load', async ()=>{
+  try{
+    const [packRes, emiratesRes, styleRes, pointsRes] = await Promise.all([
+      fetch(ABU_LOCAL_PACK_URL),
+      fetch(EMIRATES_URL),
+      fetch(STYLE_CONFIG_URL).catch(()=>null),
+      fetch(INTERACTIVE_POINTS_URL).catch(()=>null)
+    ]);
+    if(!packRes.ok) throw new Error(`Boundary pack not found: ${packRes.status}`);
+    if(!emiratesRes.ok) throw new Error(`Emirates boundary file not found: ${emiratesRes.status}`);
+    localPack = await packRes.json();
+    emiratesGeo = await emiratesRes.json();
+    if(styleRes && styleRes.ok) applyStyleConfig(await styleRes.json());
+    if(pointsRes && pointsRes.ok) interactivePoints = await pointsRes.json();
+    boundaryLoaded = true;
+    drawEmirates();
+    drawInteractivePoints();
+    renderList();
+  }catch(err){
+    console.error(err);
+    areaListEl.innerHTML='<div class="empty">Required local map files were not loaded. Check that index.html, uae_local_boundary_pack.geojson, UAE_Emirates_Boundaries.geojson, uae_digital_map_style.json, and uae_interactive_points.geojson are in the same folder.</div>';
+  }
+});
+function drawEmirates(){
+  if(!isStyleReady || !emiratesGeo) return;
+  if(map.getSource('emirates')){ map.getSource('emirates').setData(emiratesGeo); return; }
+  map.addSource('emirates',{type:'geojson',data:emiratesGeo});
+  map.addLayer({
+    id:'emirates-line',
+    type:'line',
+    source:'emirates',
+    paint:{
+      'line-color':['match',['get','shapeName'],'Dubai','#eb8450','Abu Dhabi','#64b2ff','Sharjah','#a784f7','Ajman','#59d8a3','Umm Al Quwain','#f0c85e','Ras Al Khaimah','#ff7997','Fujairah','#66d7ef', styleConfig?.lineColor || '#9FE8FF'],
+      'line-width':['case',['==',['get','shapeName'],selectedEmirate],2.3,1.2],
+      'line-opacity':0.42
+    }
+  });
+}
 function flattenAreasSimple(){ const rows=[]; Object.keys(COMMUNITY_DATA).forEach(em=>COMMUNITY_DATA[em].forEach(n=>{ const det=getAreaDetails(n, em)||{}; rows.push({ name:n, emirate:em, desc:det.desc||'Location intelligence view.', price:det.price??null, growth:det.growth||'', type:det.type||'', props:Array.isArray(det.props)?det.props:[], features:Array.isArray(det.features)?det.features:[], minPrice:det.minPrice??null, maxPrice:det.maxPrice??null }); })); return rows; }
 const AREAS2 = flattenAreasSimple();
-function renderList(){ const q=slug(searchInput.value); const filtered=AREAS2.filter(a=>(selectedEmirate==='all'||a.emirate===selectedEmirate)&&(!q||slug(a.name+' '+a.emirate+' '+(a.desc||'')).includes(q))); countValue.textContent=filtered.length; if(!filtered.length){ areaListEl.innerHTML='<div class="empty">No matching areas found.</div>'; return; } const order=['Dubai','Abu Dhabi','Sharjah','Ajman','RAK','UAQ','Fujairah']; const grouped={}; filtered.forEach(a=>(grouped[a.emirate]??=[]).push(a)); areaListEl.innerHTML = order.filter(em=>grouped[em]).map(em=>`<section><div class="group-head"><span class="dot" style="background:${colorFor(em)}"></span>${emirateLabel(em)}<span class="group-count">${grouped[em].length}</span></div>${grouped[em].map(a=>`<div class="area-row ${selectedArea&&selectedArea.name===a.name?'active':''}" data-name="${a.name}" data-em="${a.emirate}"><div><div class="area-name">${a.name}</div><div class="area-sub">${emirateLabel(a.emirate)}</div></div><div style="color:#7f91ad">›</div></div>`).join('')}</section>`).join(''); areaListEl.querySelectorAll('.area-row').forEach(row=>row.addEventListener('click',()=>{ const area=AREAS2.find(a=>a.name===row.dataset.name && a.emirate===row.dataset.em); if(area) selectArea(area); })); }
-function findLocalFeature(area){ if(!localPack || area.emirate!=='Abu Dhabi') return null; return localPack.features.find(f=>slug(f.properties.community_name_en)===slug(area.name)) || null; }
+function renderList(){ if(isStyleReady && interactivePoints) drawInteractivePoints(); const q=slug(searchInput.value); const filtered=AREAS2.filter(a=>(selectedEmirate==='all'||a.emirate===selectedEmirate)&&(!q||slug(a.name+' '+a.emirate+' '+(a.desc||'')).includes(q))); countValue.textContent=filtered.length; if(!filtered.length){ areaListEl.innerHTML='<div class="empty">No matching areas found.</div>'; return; } const order=['Dubai','Abu Dhabi','Sharjah','Ajman','RAK','UAQ','Fujairah']; const grouped={}; filtered.forEach(a=>(grouped[a.emirate]??=[]).push(a)); areaListEl.innerHTML = order.filter(em=>grouped[em]).map(em=>`<section><div class="group-head"><span class="dot" style="background:${colorFor(em)}"></span>${emirateLabel(em)}<span class="group-count">${grouped[em].length}</span></div>${grouped[em].map(a=>`<div class="area-row ${selectedArea&&selectedArea.name===a.name?'active':''}" data-name="${a.name}" data-em="${a.emirate}"><div><div class="area-name">${a.name}</div><div class="area-sub">${emirateLabel(a.emirate)}</div></div><div style="color:#7f91ad">›</div></div>`).join('')}</section>`).join(''); areaListEl.querySelectorAll('.area-row').forEach(row=>row.addEventListener('click',()=>{ const area=AREAS2.find(a=>a.name===row.dataset.name && a.emirate===row.dataset.em); if(area) selectArea(area); })); }
+function normalizeAreaName(s){
+  return String(s||'').toLowerCase()
+    .replace(/\(.*?\)/g,' ')
+    .replace(/jumeirah beach residence/g,'jbr')
+    .replace(/jumeirah lakes towers/g,'jlt')
+    .replace(/jumeirah village circle/g,'jvc')
+    .replace(/jumeirah village triangle/g,'jvt')
+    .replace(/mohammed bin rashid city/g,'mbr city')
+    .replace(/[^a-z0-9]+/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+function getOfficialNames(props){
+  const out = [];
+  if(Array.isArray(props?.official_names)) out.push(...props.official_names);
+  if(Array.isArray(props?.grouped_variants)) out.push(...props.grouped_variants);
+  return out.filter(Boolean);
+}
+function findLocalFeature(area){
+  if(!localPack || !Array.isArray(localPack.features)) return null;
+  const targetName = normalizeAreaName(area.name);
+  const targetEm = String(area.emirate||'').toLowerCase();
+  return localPack.features.find(f=>{
+    const p = f.properties || {};
+    if(String(p.emirate||'').toLowerCase() !== targetEm) return false;
+    const names = [p.community_name_en, ...getOfficialNames(p)].map(normalizeAreaName);
+    return names.some(n => n===targetName || n.includes(targetName) || targetName.includes(n));
+  }) || null;
+}
 function markerHTML(area){ return `<div class="community-marker"><div class="m-title">${area.name}</div><div class="m-sub">${emirateLabel(area.emirate)}</div></div>`; }
 function buildFeatureCollection(geom, props={}){ return {type:'FeatureCollection',features:[{type:'Feature',properties:props,geometry:geom}]}; }
 function bboxCenter(geom){ const coords=[]; const walk=a=>Array.isArray(a)&&typeof a[0]==='number'?coords.push(a):Array.isArray(a)&&a.forEach(walk); walk(geom.coordinates); let minX=1e9,maxX=-1e9,minY=1e9,maxY=-1e9; coords.forEach(([x,y])=>{if(x<minX)minX=x;if(x>maxX)maxX=x;if(y<minY)minY=y;if(y>maxY)maxY=y;}); return [(minX+maxX)/2,(minY+maxY)/2]; }
-function fitToGeom(geom){ const coords=[]; const walk=a=>Array.isArray(a)&&typeof a[0]==='number'?coords.push(a):Array.isArray(a)&&a.forEach(walk); walk(geom.coordinates); let minX=1e9,maxX=-1e9,minY=1e9,maxY=-1e9; coords.forEach(([x,y])=>{if(x<minX)minX=x;if(x>maxX)maxX=x;if(y<minY)minY=y;if(y>maxY)maxY=y;}); setSidebar(false); const center=[(minX+maxX)/2,(minY+maxY)/2]; const span=Math.max(maxX-minX,maxY-minY); let targetZoom=14.10; if(span<0.018) targetZoom=14.45; else if(span<0.035) targetZoom=14.35; else if(span<0.07) targetZoom=14.45; else if(span<0.12) targetZoom=13.65; else if(span<0.22) targetZoom=13.65; const rightPad = window.innerWidth < 980 ? 245 : 238; map.easeTo({center:center, zoom:targetZoom, pitch:62, bearing:-16, padding:{top:62,right:rightPad,bottom:18,left:14}, duration:1200, essential:true}); return center; }
+function fitToGeom(geom){ const coords=[]; const walk=a=>Array.isArray(a)&&typeof a[0]==='number'?coords.push(a):Array.isArray(a)&&a.forEach(walk); walk(geom.coordinates); let minX=1e9,maxX=-1e9,minY=1e9,maxY=-1e9; coords.forEach(([x,y])=>{if(x<minX)minX=x;if(x>maxX)maxX=x;if(y<minY)minY=y;if(y>maxY)maxY=y;}); setSidebar(false); const center=[(minX+maxX)/2,(minY+maxY)/2]; const span=Math.max(maxX-minX,maxY-minY); let targetZoom=14.45; if(span<0.018) targetZoom=14.95; else if(span<0.035) targetZoom=14.75; else if(span<0.07) targetZoom=14.95; else if(span<0.12) targetZoom=13.65; else if(span<0.22) targetZoom=13.65; const rightPad = window.innerWidth < 980 ? 245 : 238; map.easeTo({center:center, zoom:targetZoom, pitch:62, bearing:-16, padding:{top:62,right:rightPad,bottom:18,left:14}, duration:1200, essential:true}); return center; }
 function showFocus(area){ return; }
 function openPanel(area){ const c=colorFor(area.emirate); panelContent.innerHTML=`<div class="dp-hero"><div class="dp-flag"><span style="width:10px;height:10px;border-radius:50%;background:${c};display:inline-block;box-shadow:0 0 14px ${c}66"></span>${emirateLabel(area.emirate)}</div><div class="dp-name">${area.name}</div></div><div class="dp-sec"><div class="stats"><div class="stat"><div class="k">Avg. AED / ft²</div><div class="v" id="stat-price">—</div><div class="s">market view</div></div><div class="stat"><div class="k">Entry From</div><div class="v" id="stat-min">—</div><div class="s">ticket size</div></div><div class="stat"><div class="k">Upper Range</div><div class="v" id="stat-max">—</div><div class="s">high end</div></div><div class="stat"><div class="k">Growth Signal</div><div class="v" id="stat-growth">—</div><div class="s">recent view</div></div></div></div><div class="dp-sec"><div class="dp-lbl">About This Community</div><div class="dp-text">${area.desc||'Location intelligence panel.'}</div></div><div class="dp-sec"><div class="dp-lbl">Property Types</div><div class="tags">${(area.props||[]).length?(area.props||[]).map(p=>`<span class='tag'>${p}</span>`).join(''):'<span class="tag">Residential</span>'}</div></div><div class="dp-sec"><div class="dp-lbl">Key Highlights</div><div class="highlights">${(area.features||[]).length?(area.features||[]).map(x=>`<div class='highlight'><span class='hl-dot'></span><span>${x}</span></div>`).join(''):'<div class="highlight"><span class="hl-dot"></span><span>Premium location</span></div>'}</div></div>`; panel.classList.add('open'); animateCounter(document.getElementById('stat-price'), area.price || 0, 'AED '); animateCounter(document.getElementById('stat-min'), area.minPrice || 0, 'AED '); animateCounter(document.getElementById('stat-max'), area.maxPrice || 0, 'AED '); const gNum=parseInt(String(area.growth||'').replace(/[^0-9-]/g,''),10); const growthEl=document.getElementById('stat-growth'); if(Number.isFinite(gNum)){ const start=performance.now(); const dur=800; const from=0; function tick(now){ const p=Math.min(1,(now-start)/dur); const eased=1-Math.pow(1-p,3); growthEl.textContent=(Math.round(from+(gNum-from)*eased))+'%'; if(p<1) requestAnimationFrame(tick); } requestAnimationFrame(tick); } else growthEl.textContent=area.growth||'—'; }
-async function proxyPolygon(area){ const queries=[`${area.name}, ${emirateLabel(area.emirate)}, UAE`, `${area.name}, UAE`]; for(const rawQuery of queries){ try{ const res=await fetch(`${PROXY_URL}?type=nominatim&q=${encodeURIComponent(rawQuery)}`); const data=await res.json(); if(Array.isArray(data)&&data.length){ const item=data.find(d=>d.geojson && (d.geojson.type==='Polygon'||d.geojson.type==='MultiPolygon')); if(item) return item.geojson; } }catch(e){} } return null; }
-async function selectArea(area, fly=true){ selectedArea=area; selectedEmirate=area.emirate; pillsEl.querySelectorAll('.pill').forEach(p=>p.classList.toggle('on', p.dataset.e===area.emirate)); renderList(); clearSelectionLayers(); showFocus(area); openPanel(area); const localFeature=findLocalFeature(area); let geom=null; if(localFeature) geom=localFeature.geometry; else geom=await proxyPolygon(area); if(geom && isStyleReady){ const fc=buildFeatureCollection(geom,{name:area.name, emirate:area.emirate}); if(map.getSource('selected-boundary')){ try{ map.getSource('selected-boundary').setData(fc); }catch(e){ try{ map.removeSource('selected-boundary'); }catch(_){} map.addSource('selected-boundary',{type:'geojson',data:fc}); } } else { map.addSource('selected-boundary',{type:'geojson',data:fc}); } const below3D = map.getLayer('kairo-3d-buildings') ? 'kairo-3d-buildings' : undefined; const labelLayer = (map.getStyle().layers||[]).find(l => l.type==='symbol' && l.layout && l.layout['text-field']); const above3D = labelLayer ? labelLayer.id : undefined;
+async function fetchBoundaryLookup(name) {
+  return await searchNominatimDirect(name);
+}
+async function selectArea(area, fly=true){ selectedArea=area; selectedEmirate=area.emirate; if(isStyleReady && interactivePoints) drawInteractivePoints(); pillsEl.querySelectorAll('.pill').forEach(p=>p.classList.toggle('on', p.dataset.e===area.emirate)); renderList(); clearSelectionLayers(); showFocus(area); openPanel(area); const localFeature=findLocalFeature(area); let geom=null; if(localFeature) geom=localFeature.geometry; else if(ENABLE_LIVE_LOOKUP) geom=await proxyPolygon(area); if(!geom && !ENABLE_LIVE_LOOKUP){ console.warn('No exact local/admin boundary found for', area.name); } if(geom && isStyleReady){ const fc=buildFeatureCollection(geom,{name:area.name, emirate:area.emirate}); if(map.getSource('selected-boundary')){ try{ map.getSource('selected-boundary').setData(fc); }catch(e){ try{ map.removeSource('selected-boundary'); }catch(_){} map.addSource('selected-boundary',{type:'geojson',data:fc}); } } else { map.addSource('selected-boundary',{type:'geojson',data:fc}); } const below3D = map.getLayer('kairo-3d-buildings') ? 'kairo-3d-buildings' : undefined; const labelLayer = (map.getStyle().layers||[]).find(l => l.type==='symbol' && l.layout && l.layout['text-field']); const above3D = labelLayer ? labelLayer.id : undefined;
       // low frosted pedestal UNDER buildings
       map.addLayer({id:'selected-pedestal',type:'fill-extrusion',source:'selected-boundary',paint:{
         'fill-extrusion-color':'#eff6ff',
