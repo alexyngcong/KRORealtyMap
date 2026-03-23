@@ -1,0 +1,32 @@
+{
+  "package_name": "KROMap_LOCKED_FINAL_PACKAGE",
+  "source_zip_used": "KROMap_GitHub_ExactShape_Focus.zip",
+  "version_rule": "Future edits must modify files only inside this locked package, then re-zip this same folder. Do not scan workspace for older versions.",
+  "runtime_files": [
+    {
+      "file": "index.html",
+      "size_bytes": 97394,
+      "sha256": "1a09861322dd3c74b92a9e768b67487c8175f73f727421d132ac57821f130745"
+    },
+    {
+      "file": "uae_local_boundary_pack.geojson",
+      "size_bytes": 1516202,
+      "sha256": "09d0b7d6b17199bd86bbda97e8ef327c7c956e7695df38ec74d18da9a9566896"
+    },
+    {
+      "file": "UAE_Emirates_Boundaries.geojson",
+      "size_bytes": 3987,
+      "sha256": "d0911a8643f12bc53c825cd6ad2ae8ce8f478d2b7f8b3f9d0bfe16efeece0233"
+    },
+    {
+      "file": "uae_digital_map_style.json",
+      "size_bytes": 538,
+      "sha256": "349f1e19d0014726b3f0e41ea13c8d1ce5169d0048d629b20dcef4a9205c8e32"
+    },
+    {
+      "file": "uae_interactive_points.geojson",
+      "size_bytes": 25990,
+      "sha256": "cd6a6b91da51f22901c816a48aeb5d1efec3328628427030828ef3a5f922fefc"
+    }
+  ]
+}
